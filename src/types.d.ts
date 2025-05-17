@@ -1,4 +1,4 @@
-export type TemplateType = "template1" | "template2" | "template3";
+export type TemplateType = "template2";
 
 export interface Product {
   id: number;

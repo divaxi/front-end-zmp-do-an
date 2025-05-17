@@ -35,7 +35,7 @@ export function useRealHeight(
       ro.observe(element.current);
       return () => ro.disconnect();
     }
-    return () => {};
+    return () => { };
   }, [element.current]);
 
   if (typeof ResizeObserver === "undefined") {
@@ -193,9 +193,7 @@ export const useRouterTemplate = () => {
           TemplateType,
           () => Promise<{ router: RouterType }>
         > = {
-          template1: () => import("@/templates/template1/router"),
           template2: () => import("@/templates/template2/router"),
-          template3: () => import("@/templates/template3/router"),
         };
 
         const importer = templateRouterMap[storedTemplate];
