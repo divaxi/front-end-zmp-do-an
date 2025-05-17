@@ -1,15 +1,30 @@
 import {
   BookIcon,
+  ChatbotIcon,
   HomeIcon,
-  // HSSKIcon,
-  // NotificationIcon,
   ProfileIcon,
+  SatisticIcon,
 } from "./vectors";
 import HorizontalDivider from "./horizontal-divider";
-// import { useAtomValue } from "jotai";
-// import { cartState } from "@/state";
 import TransitionLink from "./transition-link";
-import { ChartLineIcon } from "lucide-react";
+import { useAtomValue } from "jotai";
+import { authState } from "@/state";
+
+const CustomerOnly = [
+  {
+    name: "Chatbot",
+    path: "/chatbot",
+    icon: ChatbotIcon,
+  },
+];
+
+const StaffOnly = [
+  {
+    name: "Thống kê",
+    path: "/satistic",
+    icon: SatisticIcon,
+  },
+];
 
 const NAV_ITEMS = [
   {
@@ -17,21 +32,12 @@ const NAV_ITEMS = [
     path: "/",
     icon: HomeIcon,
   },
-  // {
-  //   name: "Đặt lịch",
-  //   path: "/booking",
-  //   icon: BookIcon,
-  // },
   {
     name: "Lịch hẹn",
     path: "/appointment",
     icon: BookIcon,
   },
-  {
-    name: "Thống kê",
-    path: "/satistic",
-    icon: () => <ChartLineIcon className="scale-90" />,
-  },
+
   // {
   //   name: "Thông báo",
   //   path: "/cart",
@@ -59,17 +65,21 @@ const NAV_ITEMS = [
 ];
 
 export default function Footer() {
+  const { isStaff } = useAtomValue(authState);
+  const items = isStaff
+    ? [...NAV_ITEMS, ...StaffOnly]
+    : [...NAV_ITEMS, ...CustomerOnly];
   return (
     <>
       <HorizontalDivider />
       <div
         className="w-full px-4 pt-2 grid"
         style={{
-          gridTemplateColumns: `repeat(${NAV_ITEMS.length}, 1fr)`,
+          gridTemplateColumns: `repeat(${items.length}, 1fr)`,
           paddingBottom: `max(16px, env(safe-area-inset-bottom)`,
         }}
       >
-        {NAV_ITEMS.map((item) => {
+        {items.map((item) => {
           return (
             <TransitionLink
               to={item.path}
@@ -81,9 +91,7 @@ export default function Footer() {
                   <div className="w-6 h-6 flex justify-center items-center">
                     <item.icon active={isActive} />
                   </div>
-                  <div
-                    className={`text-2xs ${isActive ? "text-[#0891B3]" : ""}`}
-                  >
+                  <div className={`text-2xs ${isActive ? "text-primary" : ""}`}>
                     {item.name}
                   </div>
                 </>

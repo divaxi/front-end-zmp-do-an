@@ -52,6 +52,7 @@ export const userAtom = atomWithStorage<ZaloUserResponse>(
 );
 
 export const authState = atomWithStorage("authState", {
+  isStaff: false,
   isLogin: false,
   accessToken: "",
 });

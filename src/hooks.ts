@@ -170,7 +170,7 @@ export function useRouteHandle() {
   return [lastMatch.handle, lastMatch, matches] as const;
 }
 
-type RouterType = ReturnType<typeof createBrowserRouter>;
+// type RouterType = ReturnType<typeof createBrowserRouter>;
 
 // const emptyRouter = createBrowserRouter([
 //   {
@@ -179,34 +179,34 @@ type RouterType = ReturnType<typeof createBrowserRouter>;
 //   },
 // ]);
 //
-export const useRouterTemplate = () => {
-  const [routes, setRoutes] = useState<RouterType | null>(null);
+// export const useRouterTemplate = () => {
+//   const [routes, setRoutes] = useState<RouterType | null>(null);
+//
+//   useEffect(() => {
+//     const loadRoutes = async () => {
+//       try {
+//         const storedTemplate = localStorage.getItem(
+//           templateStorage
+//         ) as TemplateType;
+//
+//         const templateRouterMap: Record<
+//           TemplateType,
+//           () => Promise<{ router: RouterType }>
+//         > = {
+//           template2: () => import("@/templates/template2/router"),
+//         };
+//
+//         const importer = templateRouterMap[storedTemplate];
+//         const { router } = await importer();
+//
+//         setRoutes(router);
+//       } catch (error) {
+//         console.error("Failed to load template router", error);
+//       }
+//     };
+//
+//     loadRoutes();
+//   }, []);
 
-  useEffect(() => {
-    const loadRoutes = async () => {
-      try {
-        const storedTemplate = localStorage.getItem(
-          templateStorage
-        ) as TemplateType;
-
-        const templateRouterMap: Record<
-          TemplateType,
-          () => Promise<{ router: RouterType }>
-        > = {
-          template2: () => import("@/templates/template2/router"),
-        };
-
-        const importer = templateRouterMap[storedTemplate];
-        const { router } = await importer();
-
-        setRoutes(router);
-      } catch (error) {
-        console.error("Failed to load template router", error);
-      }
-    };
-
-    loadRoutes();
-  }, []);
-
-  return routes;
-};
+// return routes;
+// };
