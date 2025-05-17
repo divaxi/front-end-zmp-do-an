@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "date": "11/03",
+    "source": "2201155888 (BIDV)",
+    "description": "Chỉnh nha mắc cài kim loại thường (BS Ngọc)",
+    "amount": 1500000,
+    "status": "Đã thanh toán"
+  },
+  {
+    "id": "3",
+    "date": "11/02",
+    "source": "2201155888 (BIDV)",
+    "description": "Chỉnh nha mắc cài kim loại thường (BS Ngọc)",
+    "amount": 1500000,
+    "status": "Đã thanh toán"
+  },
+  {
+    "id": "4",
+    "date": "17/01",
+    "source": "Quỹ tiền mặt (lễ tân)",
+    "description": "Chỉnh nha mắc cài kim loại thường (BS Ngọc)",
+    "amount": 1500000,
+    "status": "Đã thanh toán"
+  },
+  {
+    "id": "5",
+    "date": "20/12",
+    "source": "Quỹ tiền mặt (lễ tân)",
+    "description": "Chỉnh nha mắc cài kim loại thường (BS Ngọc)",
+    "amount": 1500000,
+    "status": "Đã thanh toán"
+  },
+  {
+    "id": "6",
+    "date": "22/11",
+    "source": "Quỹ tiền mặt (lễ tân)",
+    "description": "Chỉnh nha mắc cài kim loại thường (BS Ngọc)",
+    "amount": 1500000,
+    "status": "Đã thanh toán"
+  }
+]

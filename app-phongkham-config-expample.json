@@ -1,0 +1,7 @@
+{
+  "app": {
+    "id": "Điền Id của app",
+    "template": "template(1,2,3)",
+    "zaloOAId": "zaloOAId"
+  }
+}
