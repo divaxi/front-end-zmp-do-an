@@ -47,7 +47,7 @@ export const ScrollRestoration: FC = () => {
         return () => content.removeEventListener("scroll", saveScrollPosition);
       }
     }
-    return () => { };
+    return () => {};
   }, [location]);
 
   return <></>;

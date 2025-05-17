@@ -13,7 +13,7 @@ interface ModalLoaderContextType {
 }
 
 const ModalLoaderContext = createContext<ModalLoaderContextType | undefined>(
-  undefined,
+  undefined
 );
 
 const ModalLoaderProvider: React.FC<{ children: ReactNode }> = ({
@@ -34,7 +34,7 @@ const ModalLoaderProvider: React.FC<{ children: ReactNode }> = ({
 
   const contextValue = useMemo(
     () => ({ showModal, hideModal, modalOpen }),
-    [modalOpen],
+    [modalOpen]
   );
 
   return (

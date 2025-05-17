@@ -1,26 +1,24 @@
-import { useAtomValue } from "jotai";
 import { useLocation, useNavigate } from "react-router-dom";
-import { categoriesStateUpwrapped } from "@/state";
 import headerLogoImage from "@/static/bookie-logo.svg";
 import { useMemo } from "react";
 import { useRouteHandle } from "@/hooks";
 import { ArrowBackIOSIcon } from "@/components/vectors";
 
 export default function Header() {
-  const categories = useAtomValue(categoriesStateUpwrapped);
   const navigate = useNavigate();
   const location = useLocation();
-  const [handle, match] = useRouteHandle();
+  const [handle] = useRouteHandle();
 
   const title = useMemo(() => {
     if (handle) {
       if (typeof handle.title === "function") {
-        return handle.title({ categories, params: match.params });
+        // return handle.title({ categories, params: match.params });
+        return;
       } else {
         return handle.title;
       }
     }
-  }, [handle, categories, match.params]);
+  }, [handle]);
 
   const showBack = location.key !== "default" && handle?.back !== false;
 

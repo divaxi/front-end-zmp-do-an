@@ -3,19 +3,19 @@
     "id": "1",
     "date": "08/04/2025",
     "doctor": "BS Đoàn Bích Ngọc",
-    "status": "Đã lấy số xếp hàng"
+    "status": "ThemMoi"
   },
   {
     "id": "2",
     "date": "11/03/2025",
     "doctor": "BS Đoàn Bích Ngọc",
-    "status": "Đã lấy số xếp hàng"
+    "status": "come_in"
   },
   {
     "id": "3",
     "date": "11/02/2025",
     "doctor": "BS Đoàn Bích Ngọc",
-    "status": "Chưa gửi thông báo hẹn lịch"
+    "status": "VaoPhongKham"
   },
   {
     "id": "4",

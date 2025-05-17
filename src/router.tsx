@@ -13,7 +13,7 @@ import DetailInfoPage from "@/common-pages/personal-infor/detail-infor";
 import PaymentPage from "@/components/payment-list";
 import ServiceDetailPage from "@/components/service/service-detail";
 import NewsDetailPage from "@/components/news/news-detail";
-import AppointmentPage from "@/components/appointment-list";
+import AppointmentPage from "./pages/appointment";
 import ServicePage from "@/components/service/service-tabs";
 import TreatmentPage from "@/components/treatment-list";
 import BookConfirmPage from "@/common-pages/booking/book-confirm";

@@ -35,7 +35,7 @@ export function useRealHeight(
       ro.observe(element.current);
       return () => ro.disconnect();
     }
-    return () => { };
+    return () => {};
   }, [element.current]);
 
   if (typeof ResizeObserver === "undefined") {
