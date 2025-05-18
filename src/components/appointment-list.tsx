@@ -7,8 +7,8 @@ import { APPOINTMENT_STATUS_TEXT } from "@/constants/appointment";
 import { useModalLoader } from "@/provider/ModalProvider";
 import { useForm } from "react-hook-form";
 import AppointmentStatusConfirmModal from "./modal/appointment-status-confirm";
-import { useAtomValue } from "jotai";
-import { authState } from "@/state";
+import { useSetAtom } from "jotai";
+import { appointmentList } from "@/state";
 import { LucideTrash2 } from "lucide-react";
 import AppointmentDeleteConfirmModal from "./modal/appointment-delete-confirm";
 
@@ -17,14 +17,15 @@ type Status = keyof typeof APPOINTMENT_STATUS_TEXT;
 type AppointmentListProps = {
   appointments: Appointment[];
   isLoading: boolean;
+  isStaff?: boolean;
 };
 
 export default function AppointmentList({
   appointments,
   isLoading,
+  isStaff,
 }: AppointmentListProps) {
   const { showModal } = useModalLoader();
-  const { isStaff } = useAtomValue(authState);
 
   const { control, setValue } = useForm<Record<string, { status: Status }>>({
     defaultValues: appointments.reduce(
@@ -35,10 +36,11 @@ export default function AppointmentList({
       {} as Record<string, { status: Status }>
     ),
   });
+  const setAppointments = useSetAtom(appointmentList);
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className="flex flex-col p-4 gap-y-8">
+      <div className="flex flex-col p-4 gap-y-8 pb-[120px]">
         {isLoading && <LoadingSpinner />}
         {!isLoading && (!appointments || appointments.length === 0) && (
           <NoData />
@@ -79,7 +81,13 @@ export default function AppointmentList({
                         showModal(
                           <AppointmentDeleteConfirmModal
                             dateTime={appointment.date}
-                            execute={() => {}}
+                            execute={() => {
+                              setAppointments(
+                                appointments.filter(
+                                  (d) => d.id !== appointment.id
+                                )
+                              );
+                            }}
                           />
                         );
                       }}

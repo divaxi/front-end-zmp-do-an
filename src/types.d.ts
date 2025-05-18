@@ -1,5 +1,9 @@
 export type TemplateType = "template2";
 
+export interface Schedule {}
+
+export interface CustomerRecord {}
+
 export interface Product {
   id: number;
   name: string;

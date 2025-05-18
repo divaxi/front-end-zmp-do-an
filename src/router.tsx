@@ -17,6 +17,12 @@ import AppointmentPage from "./pages/appointment";
 import ServicePage from "@/components/service/service-tabs";
 import TreatmentPage from "@/components/treatment-list";
 import BookConfirmPage from "@/common-pages/booking/book-confirm";
+import CustomerRecordPage from "./pages/customer-record";
+import CustomerRecordCreatePage from "./pages/customer-record/create-form";
+import ScheduleCreatePage from "./pages/schedule/create-form";
+import ScheduleUpdatePage from "./pages/schedule/update-form";
+import SchedulePage from "./pages/schedule";
+import CustomerRecordUpdatePage from "./pages/customer-record/update-form";
 
 export const router = createBrowserRouter(
   [
@@ -132,6 +138,48 @@ export const router = createBrowserRouter(
           element: <TreatmentPage />,
           handle: {
             title: "Thủ thuật điều trị",
+          },
+        },
+        {
+          path: "/customer-record", // <-- Add the new route
+          element: <CustomerRecordPage />,
+          handle: {
+            title: "Hồ sơ",
+          },
+        },
+        {
+          path: "/customer-record/create", // <-- Add the new route
+          element: <CustomerRecordCreatePage />,
+          handle: {
+            title: "Thêm hồ sơ",
+          },
+        },
+        {
+          path: "/customer-record/update/:id", // <-- Add the new route
+          element: <CustomerRecordUpdatePage />,
+          handle: {
+            title: "Cập nhật hồ sơ",
+          },
+        },
+        {
+          path: "/schedule", // <-- Add the new route
+          element: <SchedulePage />,
+          handle: {
+            title: "Lịch hẹn",
+          },
+        },
+        {
+          path: "/schedule/create", // <-- Add the new route
+          element: <ScheduleCreatePage />,
+          handle: {
+            title: "Thêm lịch hẹn",
+          },
+        },
+        {
+          path: "/schedule/update/:id", // <-- Add the new route
+          element: <ScheduleUpdatePage />,
+          handle: {
+            title: "Cập nhật lịch hẹn",
           },
         },
       ],

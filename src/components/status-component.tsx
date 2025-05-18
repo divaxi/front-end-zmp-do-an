@@ -11,7 +11,6 @@ import {
   APPOINTMENT_STATUS_COLOR,
 } from "@/constants/appointment";
 import { Control, Controller, FieldValues } from "react-hook-form";
-import { LucideTrash2, TrashIcon } from "lucide-react";
 
 type Status = keyof typeof APPOINTMENT_STATUS_TEXT;
 
@@ -39,6 +38,7 @@ const StatusComponent = <T extends FieldValues = FieldValues>({
     <Controller
       control={control}
       name={name as never}
+      defaultValue={status as never}
       render={({ field }) => (
         <Select
           value={field.value}

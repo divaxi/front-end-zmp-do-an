@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { loadingState } from "@/state";
+import { useAtomValue } from "jotai";
 import { Loader2 } from "lucide-react";
 
 interface LoadingSpinnerProps {
@@ -6,6 +8,9 @@ interface LoadingSpinnerProps {
 }
 
 function LoadingSpinner({ className }: LoadingSpinnerProps) {
+  const isLoading = useAtomValue(loadingState);
+  if (!isLoading) return null;
+
   return (
     <div
       className={cn(

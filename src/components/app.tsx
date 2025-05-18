@@ -12,6 +12,7 @@ import { useAtomValue } from "jotai";
 import { authState } from "@/state";
 import { OpenAPI } from "@/client/api";
 import { router } from "@/router";
+import { LoadingSpinner } from "./loading-spinner";
 
 const MyApp = () => {
   const { accessToken } = useAtomValue(authState);
@@ -23,6 +24,7 @@ const MyApp = () => {
         <ModalLoaderProvider>
           <TemplateProvider>
             <ThemeProvider>
+              <LoadingSpinner />
               <RouterProvider router={router} />
             </ThemeProvider>
           </TemplateProvider>

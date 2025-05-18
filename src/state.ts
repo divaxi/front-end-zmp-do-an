@@ -5,9 +5,11 @@ import {
   Cart,
   Category,
   Color,
+  CustomerRecord,
   NewsDetail,
   Payment,
   Product,
+  Schedule,
   Service,
   ServiceCategory,
   ServiceDetail,
@@ -52,10 +54,18 @@ export const userAtom = atomWithStorage<ZaloUserResponse>(
 );
 
 export const authState = atomWithStorage("authState", {
-  isStaff: false,
+  isStaff: true,
   isLogin: false,
   accessToken: "",
 });
+export const loadingState = atom<boolean>(false);
+
+export const appointmentList = atom<Appointment[]>([]);
+
+export const scheduleList = atom<Schedule[]>([]);
+
+export const customerRecordList = atom<CustomerRecord[]>([]);
+
 export const bannersState = atom(() =>
   requestWithFallback<string[]>("/banners", [])
 );

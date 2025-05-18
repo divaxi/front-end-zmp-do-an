@@ -1,21 +1,18 @@
-import React, { FunctionComponent } from "react";
-import { Modal, useSnackbar } from "zmp-ui";
+import { FunctionComponent } from "react";
+import { Modal } from "zmp-ui";
 import { useModalLoader } from "@/provider/ModalProvider";
 
 interface props {
-  dateTime: string;
   execute: () => void;
 }
 
-const AppointmentDeleteConfirmModal: FunctionComponent<props> = ({
-  dateTime,
-  execute,
-}) => {
+const CustomerRecordCreateModal: FunctionComponent<props> = ({ execute }) => {
   const { modalOpen, hideModal } = useModalLoader();
+
   return (
     <Modal
       visible={modalOpen}
-      title="Hủy lịch hẹn"
+      title="Tạo hồ sơ"
       onClose={() => {
         hideModal();
       }}
@@ -23,13 +20,10 @@ const AppointmentDeleteConfirmModal: FunctionComponent<props> = ({
         {
           text: "Xác nhận",
           highLight: true,
-          style: {
-            color: "red",
-          },
+          className: "logout-text",
           onClick: () => {
-            execute();
-
             hideModal();
+            execute();
           },
         },
         {
@@ -37,9 +31,9 @@ const AppointmentDeleteConfirmModal: FunctionComponent<props> = ({
           close: true,
         },
       ]}
-      description={`Bạn có chắc chắn muốn hủy lịch hẹn vào ngày "${dateTime}"`}
+      description={`Bạn có chắc chắn thông tin hồ sơ`}
     />
   );
 };
 
-export default AppointmentDeleteConfirmModal;
+export default CustomerRecordCreateModal;
