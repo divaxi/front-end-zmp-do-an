@@ -1,10 +1,8 @@
-import { useBookingTimeSchedule } from "@/client/services/booking";
-import { formatMinutesToHourString } from "@/utils/date";
+// import { useBookingTimeSchedule } from "@/client/services/booking";
+// import { formatMinutesToHourString } from "@/utils/date";
 import React, { useState } from "react";
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { Page, Icon, Button } from "zmp-ui";
-
-// --- Component ---
 
 export default function BookTimeSlotPage() {
   const [searchParams] = useSearchParams();
@@ -15,9 +13,9 @@ export default function BookTimeSlotPage() {
 
   const serviceId = searchParams.get("serviceId");
   const providerId = searchParams.get("providerId");
-  const { data: availableTimes, isLoading } = useBookingTimeSchedule(
-    providerId || ""
-  );
+  // const { data: availableTimes, isLoading } = useBookingTimeSchedule(
+  //   providerId || ""
+  // );
 
   // For now, hardcode the date. In a real app, you"d use a date picker.
   const [selectedDate] = useState<string>("2025-03-15"); // YYYY-MM-DD format
@@ -45,9 +43,7 @@ export default function BookTimeSlotPage() {
       });
       // Navigate to the next step (e.g., confirmation page)
       // Pass data via state or query params as needed
-      navigate(
-        `/booking/confirmation?serviceId=${serviceId}&providerId=${providerId}&date=${selectedDate}&time=${selectedTime}`
-      );
+      navigate(`/booking/book-confirm`);
     } else {
       // Optionally show a message to select a time
       console.log("Please select a time slot.");
@@ -115,41 +111,40 @@ export default function BookTimeSlotPage() {
           {formatDateDisplay(selectedDate)}
         </div>
 
-        {/* Time Slot Grid */}
-        {isLoading ? (
-          <div className="text-center text-gray-500 mt-8">Đang tải lịch...</div>
-        ) : !availableTimes || availableTimes?.length > 0 ? (
-          <div className="grid grid-cols-4 gap-3">
-            {availableTimes?.map((time) => (
-              <button
-                key={time.Id}
-                onClick={() =>
-                  handleTimeSelect(time.FromTime?.toString() || "")
-                }
-                className={`rounded p-2 text-center text-sm cursor-pointer border transition-colors ${
-                  selectedTime === time.FromTime?.toString()
-                    ? "bg-[#0891B2] text-white border-[#0891B2] font-medium" // Teal color for selected
-                    : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
-                }`}
-              >
-                {formatMinutesToHourString(time.FromTime || 0)}
-              </button>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center text-gray-500 mt-8">
-            Không có lịch trống cho ngày này.
-          </div>
-        )}
+        {/* {isLoading ? ( */}
+        {/*   <div className="text-center text-gray-500 mt-8">Đang tải lịch...</div> */}
+        {/* ) : !availableTimes || availableTimes?.length > 0 ? ( */}
+        {/*   <div className="grid grid-cols-4 gap-3"> */}
+        {/*     {availableTimes?.map((time) => ( */}
+        {/*       <button */}
+        {/*         key={time.Id} */}
+        {/*         onClick={() => */}
+        {/*           handleTimeSelect(time.FromTime?.toString() || "") */}
+        {/*         } */}
+        {/*         className={`rounded p-2 text-center text-sm cursor-pointer border transition-colors ${ */}
+        {/*           selectedTime === time.FromTime?.toString() */}
+        {/*             ? "bg-[#0891B2] text-white border-[#0891B2] font-medium" // Teal color for selected */}
+        {/*             : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50" */}
+        {/*         }`} */}
+        {/*       > */}
+        {/*         {formatMinutesToHourString(time.FromTime || 0)} */}
+        {/*       </button> */}
+        {/*     ))} */}
+        {/*   </div> */}
+        {/* ) : ( */}
+        {/*   <div className="text-center text-gray-500 mt-8"> */}
+        {/*     Không có lịch trống cho ngày này. */}
+        {/*   </div> */}
+        {/* )} */}
       </div>
 
       {/* Footer Button */}
-      <div className="p-4 sticky bottom-0 bg-gray-100 border-t border-gray-200">
+      <div className="p-4 sticky bottom-200 bg-gray-100 border-t border-gray-200">
         <Button
           fullWidth
           onClick={handleContinue}
-          disabled={!selectedTime || isLoading}
-          className={`bg-[#86D1D7] hover:bg-[#6ABEC3] text-white font-medium ${!selectedTime || isLoading ? "opacity-50 cursor-not-allowed" : ""}`} // Custom color similar to image
+          // disabled={!selectedTime || isLoading}
+          // className={`bg-[#86D1D7] hover:bg-[#6ABEC3] text-white font-medium ${!selectedTime || isLoading ? "opacity-50 cursor-not-allowed" : ""}`} // Custom color similar to image
           style={
             {
               "--zmp-button-bg-color": "#86D1D7",

@@ -3,22 +3,21 @@ import { LoadingSpinner } from "./loading-spinner";
 import { NoData } from "./no-data";
 import { CustomerRecord } from "@/types";
 import { useModalLoader } from "@/provider/ModalProvider";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { LucideTrash2 } from "lucide-react";
-import { customerRecordList } from "@/state";
+import { customerRecordList, loadingState } from "@/state";
 
 type CustomerRecordListProps = {
   customerRecords: CustomerRecord[];
-  isLoading: boolean;
 };
 
 export default function CustomerRecordList({
   customerRecords,
-  isLoading,
 }: CustomerRecordListProps) {
   const { showModal } = useModalLoader();
 
   const setcustomerRecords = useSetAtom(customerRecordList);
+  const isLoading = useAtomValue(loadingState);
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>

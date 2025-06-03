@@ -9,6 +9,7 @@ import HorizontalDivider from "./horizontal-divider";
 import TransitionLink from "./transition-link";
 import { useAtomValue } from "jotai";
 import { authState } from "@/state";
+import { RoleEnum } from "@/utils/enum";
 
 const CustomerOnly = [
   {
@@ -65,7 +66,8 @@ const NAV_ITEMS = [
 ];
 
 export default function Footer() {
-  const { isStaff } = useAtomValue(authState);
+  const auth = useAtomValue(authState);
+  const isStaff = auth?.user.role.id === RoleEnum.staff;
   const items = isStaff
     ? [...NAV_ITEMS, ...StaffOnly]
     : [...NAV_ITEMS, ...CustomerOnly];

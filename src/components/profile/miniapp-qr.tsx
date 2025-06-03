@@ -11,8 +11,8 @@ export const onCLickShareSheet = () => {
   openShareSheet({
     type: "zmp",
     data: {
-      title: `Mini app Bookie Hub`,
-      thumbnail: `https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/241360303_101608758939310_4612246154167690337_n.png?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=2aa_WhV3bHMQ7kNvwFO69P0&_nc_oc=AdnLjgkoLGl81zCQHc5XEciE-aDLolBSHvt4jHPUD-5IRsGCAG6qJ5eKTztViTgeWASA_FI8-HfWUEViu_JBz-ye&_nc_zt=23&_nc_ht=scontent-hkg4-1.xx&_nc_gid=rVBvBinJBItQ7X9L5N3K6w&oh=00_AfFbnQJiuRqeh7XTTziehIezPt8Xk16Uub13ml8fuLsK6g&oe=67FAC9DA`,
+      title: `Mini app nha khoa Kim Cương`,
+      thumbnail: `https://i.imgur.com/PhOQtGH.jpeg`,
       path: `/`,
     },
   });
@@ -72,11 +72,7 @@ export default function MiniAppQR() {
 
   const qrElementId = "miniAppQR";
   const appConfig = getConfig((config) => config.app);
-  // const miniAppDeepLink = `https://zalo.me/s/${appConfig?.appId}`; // Ví dụ link, điều chỉnh nếu cần
   const miniAppDeepLink = `https://zalo.me/s/${appConfig}`;
-
-  const logo =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0qcFJ-q9mX9HqDVeeFujghgWNyiD-kzTFzQ&s";
 
   const onCLickDownloadQR = () => {
     onClickSaveDivAsBase64(openSnackbar, loading, setLoading, qrElementId);
@@ -93,19 +89,7 @@ export default function MiniAppQR() {
           id="miniAppQR"
           className="flex items-center justify-center flex-col space-y-4"
         >
-          <img
-            src={logo}
-            alt="QR"
-            className="w-24 h-24"
-            crossOrigin="anonymous"
-          />
-
-          <QrCodeDisplay
-            value={miniAppDeepLink} // Truyền giá trị cần mã hóa
-            size={200} // Kích thước QR code
-            logoSrc={logo}
-            logoSize={40}
-          />
+          <QrCodeDisplay value={miniAppDeepLink} size={200} logoSize={40} />
 
           <div className="text-sm text-gray-500 px-12 text-center">
             Chia sẻ mã QR này để bạn bè có thể sử dụng nhanh chóng

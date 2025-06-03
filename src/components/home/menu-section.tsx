@@ -46,7 +46,7 @@ const MenuSection: FC<props> = ({ extras = [] }) => {
       id: "schedule",
       name: "Lịch làm việc",
       icon: <CalendarSyncIcon className="text-iconStroke scale-125" />,
-      path: "/payment",
+      path: "/schedule",
     },
     {
       id: "satistic",

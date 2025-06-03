@@ -43,7 +43,7 @@ export default function Layout() {
       >
         <Header />
       </div>
-      <div ref={contentRef} className="flex-1 overflow-y-auto mt-20">
+      <div ref={contentRef} className="relative flex-1 overflow-y-auto mt-20">
         <Suspense fallback={<PageSkeleton />}>
           <Outlet />
         </Suspense>

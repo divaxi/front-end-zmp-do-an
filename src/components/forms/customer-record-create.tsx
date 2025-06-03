@@ -17,7 +17,6 @@ import TextInputController from "./input-components/TextInputController";
 import DateInputController from "./input-components/DateInputController";
 import RadioButtonController from "./input-components/RadioButtonController";
 
-// Định nghĩa schema validation
 const customerRecordSchema = z.object({
   fullName: z.string().min(1, "Vui lòng nhập họ và tên"),
   DOB: z.string({
@@ -64,7 +63,10 @@ const CustomerRecordCreate: React.FC<CustomerRecordCreateProps> = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="space-y-6 m-4"
+      >
         <FormField
           control={form.control}
           name="fullName"

@@ -15,9 +15,6 @@ export default function BookConfirmPage() {
       <ProfileInfo onReadyChange={setReady} />
       <SelectedInfo />
       <div className="mt-auto p-4">
-        <Button variant="outline" className="w-full mb-2">
-          Quay lại
-        </Button>
         <Button
           className={clsx(
             "w-full bg-primary hover:brightness-75 text-white",

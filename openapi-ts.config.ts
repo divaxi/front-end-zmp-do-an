@@ -1,7 +1,7 @@
 import { defaultPlugins } from "@hey-api/openapi-ts";
 
 export default {
-  input: "../Bookie_OpenAPI_Formatted.json",
+  input: "./swagger.json",
   output: {
     path: "./src/client/api",
     format: "prettier",

@@ -4,6 +4,12 @@ export interface Schedule {}
 
 export interface CustomerRecord {}
 
+export interface Message {
+  id: string;
+  content: string;
+  sender: "user" | "bot";
+}
+
 export interface Product {
   id: number;
   name: string;

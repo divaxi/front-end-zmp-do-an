@@ -7,25 +7,25 @@ import { APPOINTMENT_STATUS_TEXT } from "@/constants/appointment";
 import { useModalLoader } from "@/provider/ModalProvider";
 import { useForm } from "react-hook-form";
 import AppointmentStatusConfirmModal from "./modal/appointment-status-confirm";
-import { useSetAtom } from "jotai";
-import { appointmentList } from "@/state";
-import { LucideTrash2 } from "lucide-react";
+import { useAtomValue, useSetAtom } from "jotai";
+import { appointmentList, loadingState } from "@/state";
+import { CheckIcon, LucideTrash2 } from "lucide-react";
 import AppointmentDeleteConfirmModal from "./modal/appointment-delete-confirm";
+import ReceptionModal from "./modal/reception-modal";
 
 type Status = keyof typeof APPOINTMENT_STATUS_TEXT;
 
 type AppointmentListProps = {
   appointments: Appointment[];
-  isLoading: boolean;
   isStaff?: boolean;
 };
 
 export default function AppointmentList({
   appointments,
-  isLoading,
   isStaff,
 }: AppointmentListProps) {
   const { showModal } = useModalLoader();
+  const isLoading = useAtomValue(loadingState);
 
   const { control, setValue } = useForm<Record<string, { status: Status }>>({
     defaultValues: appointments.reduce(
@@ -55,6 +55,9 @@ export default function AppointmentList({
                     {appointment.doctor}
                   </span>
                   <h2 className="text-xs ">Khách hàng: {appointment.doctor}</h2>
+                  <span className="text-2xs text-subtitle">
+                    {appointment?.checkinTime || "Chưa checkin"}
+                  </span>
                 </div>
                 <div className="flex flex-col self-start items-center">
                   <StatusComponent
@@ -74,24 +77,35 @@ export default function AppointmentList({
                       );
                     }}
                   />
-                  {!isStaff && appointment.status === "ThemMoi" && (
-                    <LucideTrash2
-                      className="scale-90 mt-1.5 text-danger"
-                      onClick={() => {
-                        showModal(
-                          <AppointmentDeleteConfirmModal
-                            dateTime={appointment.date}
-                            execute={() => {
-                              setAppointments(
-                                appointments.filter(
-                                  (d) => d.id !== appointment.id
-                                )
-                              );
-                            }}
-                          />
-                        );
-                      }}
-                    />
+                  {appointment.status === "ThemMoi" && (
+                    <>
+                      {!isStaff ? (
+                        <LucideTrash2
+                          className="scale-90 mt-1.5 text-danger"
+                          onClick={() => {
+                            showModal(
+                              <AppointmentDeleteConfirmModal
+                                dateTime={appointment.date}
+                                execute={() => {
+                                  setAppointments(
+                                    appointments.filter(
+                                      (d) => d.id !== appointment.id
+                                    )
+                                  );
+                                }}
+                              />
+                            );
+                          }}
+                        />
+                      ) : (
+                        <CheckIcon
+                          className="scale-120 mt-2 text-white bg-green-400 rounded-md "
+                          onClick={() => {
+                            showModal(<ReceptionModal />);
+                          }}
+                        />
+                      )}
+                    </>
                   )}
                 </div>
               </div>

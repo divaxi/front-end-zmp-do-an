@@ -15,8 +15,8 @@ import { router } from "@/router";
 import { LoadingSpinner } from "./loading-spinner";
 
 const MyApp = () => {
-  const { accessToken } = useAtomValue(authState);
-  OpenAPI.TOKEN = accessToken;
+  const auth = useAtomValue(authState);
+  OpenAPI.TOKEN = auth?.token;
   localStorage.setItem(templateStorage, app.template);
   return (
     <App>

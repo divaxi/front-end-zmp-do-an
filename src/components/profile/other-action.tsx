@@ -1,5 +1,4 @@
-import { OpenAPI } from "@/client/api";
-import loginWithZalo from "@/client/services/loginZalo";
+import { loginWithZalo, logout } from "@/client/services/auth";
 import {
   ShieldIcon,
   PhoneIcon,
@@ -7,28 +6,23 @@ import {
   ChevronRight,
 } from "@/components/vectors";
 import { useToBeImplemented } from "@/hooks";
-import { userAtom } from "@/state";
-import { useSetAtom } from "jotai";
+import { authState } from "@/state";
+import { useAtom } from "jotai";
+import { LogInIcon } from "lucide-react";
+import { useSnackbar } from "zmp-ui";
 
 export default function OtherActions() {
   const toBeImplemented = useToBeImplemented();
-  const setUser = useSetAtom(userAtom);
+  const { openSnackbar } = useSnackbar();
+  const [user, setUser] = useAtom(authState);
 
   const actions = [
     {
       label: "Điều khoản & Chính sách quyền riêng tư",
       icon: ShieldIcon,
-      onClick: async () => {
-        const user = await loginWithZalo();
-        if (!user) {
-          console.warn("No User");
-        } else {
-          setUser(user);
-          OpenAPI.TOKEN = user.JwtToken;
-        }
-      },
-      className: "text-gray-800", // Default text color
-      iconClassName: "text-gray-500", // Default icon color
+      onClick: toBeImplemented,
+      className: "text-gray-800",
+      iconClassName: "text-gray-500",
     },
     {
       label: "Ghim ra màn hình chính",
@@ -40,16 +34,49 @@ export default function OtherActions() {
     {
       label: "Đăng xuất",
       icon: LogoutIcon,
-      onClick: toBeImplemented, // Replace with actual logout logic
-      className: "text-danger", // Use danger color from theme
-      iconClassName: "text-danger", // Use danger color for icon too
+      onClick: () => {
+        logout();
+        setUser(undefined);
+        openSnackbar({
+          type: "info",
+          text: "Đăng xuất thành công",
+        });
+      },
+      className: "text-danger",
+      iconClassName: "text-danger",
+    },
+    {
+      label: "Đăng nhập",
+      icon: LogInIcon,
+      onClick: () => {
+        loginWithZalo()
+          .then((user) => {
+            setUser(user);
+            openSnackbar({
+              type: "success",
+              text: "Đăng nhập thành công",
+            });
+          })
+          .catch(() =>
+            openSnackbar({
+              type: "error",
+              text: "Đăng nhập thất bại",
+            })
+          );
+      },
+      className: "text-primary",
+      iconClassName: "text-primary",
     },
   ];
+
+  const filteredActions = actions.filter((action) => {
+    return !user ? action.label !== "Đăng xuất" : action.label !== "Đăng nhập";
+  });
 
   return (
     <div className="bg-white">
       <div className="p-4 pb-0 font-medium text-gray-500">Khác</div>
-      {actions.map((action, index) => (
+      {filteredActions.map((action, index) => (
         <div key={action.label}>
           <div
             className="flex items-center justify-between p-4 cursor-pointer" // Bỏ border-b ở đây

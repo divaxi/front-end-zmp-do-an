@@ -34,7 +34,7 @@ const StatusComponent = <T extends FieldValues = FieldValues>({
   const sharedClass =
     "min-w-[130px] h-8 px-2 py-1 rounded-lg text-xs text-white inline-flex items-center justify-center border-none";
 
-  return isStaff ? (
+  return isStaff && status !== "ThemMoi" ? (
     <Controller
       control={control}
       name={name as never}

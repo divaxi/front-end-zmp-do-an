@@ -1,13 +1,13 @@
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Page, Icon } from "zmp-ui";
 import ProviderCard from "@/components/booking/provider-card"; // Import component ProviderCard
-import { useBookingProvider } from "@/client/services/booking";
+// import { useBookingProvider } from "@/client/services/booking";
 export default function BookProviderPage() {
   const { serviceId } = useParams<{ serviceId: string }>(); // Lấy serviceId từ URL
   const location = useLocation();
   const serviceName = location.state.serviceName;
   const navigate = useNavigate();
-  const { data: providers } = useBookingProvider(serviceId || "");
+  // const { data: providers } = useBookingProvider(serviceId || "");
 
   // Hàm xử lý khi chọn một nhà cung cấp (provider)
   const handleProviderSelect = (
@@ -55,25 +55,23 @@ export default function BookProviderPage() {
 
       {/* Danh sách các nhà cung cấp */}
       <div className="flex-grow p-4 pt-2 overflow-y-auto">
-        {" "}
-        {/* Thêm padding top nhỏ hơn */}
-        {!providers?.Value || providers?.Value?.length > 0 ? (
-          providers?.Value?.map((provider) => (
-            <ProviderCard
-              key={provider.Id}
-              avatar={provider.Name || ""}
-              name={provider.Name || ""}
-              description={provider.Description || ""}
-              providerId={provider.Id || ""}
-              onClick={() => handleProviderSelect(provider.Id, provider.Name)} // Truyền hàm xử lý vào props
-            />
-          ))
-        ) : (
-          // Hiển thị thông báo nếu không có provider nào cho dịch vụ này
-          <div className="text-center text-gray-500 mt-8">
-            Không tìm thấy nhà cung cấp nào cho dịch vụ này.
-          </div>
-        )}
+        {/* {!providers?.Value || providers?.Value?.length > 0 ? ( */}
+        {/*   providers?.Value?.map((provider) => ( */}
+        {/*     <ProviderCard */}
+        {/*       key={provider.Id} */}
+        {/*       avatar={provider.Name || ""} */}
+        {/*       name={provider.Name || ""} */}
+        {/*       description={provider.Description || ""} */}
+        {/*       providerId={provider.Id || ""} */}
+        {/*       onClick={() => handleProviderSelect(provider.Id, provider.Name)} // Truyền hàm xử lý vào props */}
+        {/*     /> */}
+        {/*   )) */}
+        {/* ) : ( */}
+        {/*   // Hiển thị thông báo nếu không có provider nào cho dịch vụ này */}
+        {/*   <div className="text-center text-gray-500 mt-8"> */}
+        {/*     Không tìm thấy nhà cung cấp nào cho dịch vụ này. */}
+        {/*   </div> */}
+        {/* )} */}
       </div>
     </Page>
   );

@@ -133,3 +133,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+.zaui-modal-content-description {
+  white-space: pre-line;
+  font-size: 0.875rem; /* text-sm */
+  color: #374151; /* text-gray-700 */
+}

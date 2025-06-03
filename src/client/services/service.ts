@@ -1,18 +1,18 @@
-import { DefaultService } from "../api/sdk.gen";
+import { ServicesControllerFindAllV1Data } from "../api";
+import { ServicesService } from "../api/sdk.gen";
 import useSWR from "swr";
 
-const fetchBookieService = async () => {
-  return await DefaultService.getByDomainCmsDichVuPaging({
-    domain: "demo",
-    page: 1,
-    size: 9999,
-  });
+const fetchServices = async (query: ServicesControllerFindAllV1Data) => {
+  return await ServicesService.servicesControllerFindAllV1(query);
 };
 
-export const useBookieService = () => {
+export const useServices = ({
+  limit,
+  page,
+}: ServicesControllerFindAllV1Data) => {
   const { data, error, isLoading, mutate } = useSWR(
-    "bookie-service",
-    fetchBookieService
+    ["services", limit, page],
+    () => fetchServices({ limit, page })
   );
 
   return {

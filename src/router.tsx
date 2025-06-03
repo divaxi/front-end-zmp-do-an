@@ -7,8 +7,8 @@ import BookServicePage from "@/common-pages/booking/book-service";
 import BookProviderPage from "@/common-pages/booking/book-provider";
 import BookTimeSlotPage from "@/common-pages/booking/book-time-slot";
 import PersonalInfoPage from "@/common-pages/personal-infor";
-import LinkHealthRecordPage from "@/common-pages/personal-infor/link-record";
 import DetailInfoPage from "@/common-pages/personal-infor/detail-infor";
+import { ProtectedRoute } from "@/components/protected-route";
 
 import PaymentPage from "@/components/payment-list";
 import ServiceDetailPage from "@/components/service/service-detail";
@@ -23,6 +23,7 @@ import ScheduleCreatePage from "./pages/schedule/create-form";
 import ScheduleUpdatePage from "./pages/schedule/update-form";
 import SchedulePage from "./pages/schedule";
 import CustomerRecordUpdatePage from "./pages/customer-record/update-form";
+import ChatbotPage from "./pages/chatbot";
 
 export const router = createBrowserRouter(
   [
@@ -39,7 +40,11 @@ export const router = createBrowserRouter(
         },
         {
           path: "/appointment",
-          element: <AppointmentPage />,
+          element: (
+            <ProtectedRoute>
+              <AppointmentPage />
+            </ProtectedRoute>
+          ),
           handle: {
             title: "Lịch hẹn",
           },
@@ -73,8 +78,7 @@ export const router = createBrowserRouter(
           },
         },
         {
-          // This route expects query parameters: ?serviceId=...&providerId=...
-          path: "/booking/time-slot", // <-- Add the new route
+          path: "/booking/time-slot",
           element: <BookTimeSlotPage />,
           handle: {
             title: "Chọn thời gian",
@@ -92,14 +96,6 @@ export const router = createBrowserRouter(
           element: <PersonalInfoPage />,
           handle: {
             title: "Thông tin cá nhân",
-            back: true, // Hiển thị nút quay lại
-          },
-        },
-        {
-          path: "/profile/health-records/link",
-          element: <LinkHealthRecordPage />,
-          handle: {
-            title: "Liên kết hồ sơ",
             back: true,
           },
         },
@@ -127,59 +123,70 @@ export const router = createBrowserRouter(
           },
         },
         {
-          path: "/payment", // <-- Add the new route
+          path: "/payment",
           element: <PaymentPage />,
           handle: {
             title: "Thanh toán",
           },
         },
         {
-          path: "/treatment", // <-- Add the new route
+          path: "/treatment",
           element: <TreatmentPage />,
           handle: {
             title: "Thủ thuật điều trị",
           },
         },
         {
-          path: "/customer-record", // <-- Add the new route
+          path: "/customer-record",
           element: <CustomerRecordPage />,
           handle: {
             title: "Hồ sơ",
           },
         },
         {
-          path: "/customer-record/create", // <-- Add the new route
+          path: "/customer-record/create",
           element: <CustomerRecordCreatePage />,
           handle: {
             title: "Thêm hồ sơ",
           },
         },
         {
-          path: "/customer-record/update/:id", // <-- Add the new route
+          path: "/customer-record/update/:id",
           element: <CustomerRecordUpdatePage />,
           handle: {
             title: "Cập nhật hồ sơ",
           },
         },
         {
-          path: "/schedule", // <-- Add the new route
+          path: "/schedule",
           element: <SchedulePage />,
           handle: {
             title: "Lịch hẹn",
           },
         },
         {
-          path: "/schedule/create", // <-- Add the new route
+          path: "/schedule/create",
           element: <ScheduleCreatePage />,
           handle: {
             title: "Thêm lịch hẹn",
           },
         },
         {
-          path: "/schedule/update/:id", // <-- Add the new route
+          path: "/schedule/update/:id",
           element: <ScheduleUpdatePage />,
           handle: {
             title: "Cập nhật lịch hẹn",
+          },
+        },
+        {
+          path: "/chatbot",
+          element: (
+            <ProtectedRoute>
+              <ChatbotPage />
+            </ProtectedRoute>
+          ),
+          handle: {
+            title: "Chatbot",
           },
         },
       ],

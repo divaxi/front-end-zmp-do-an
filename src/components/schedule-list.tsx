@@ -3,24 +3,23 @@ import { LoadingSpinner } from "./loading-spinner";
 import { NoData } from "./no-data";
 import { Schedule } from "@/types";
 import { useModalLoader } from "@/provider/ModalProvider";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { LucideTrash2 } from "lucide-react";
-import { scheduleList } from "@/state";
+import { loadingState, scheduleList } from "@/state";
 
 type ScheduleListProps = {
   schedules: Schedule[];
-  isLoading: boolean;
   isStaff?: boolean;
 };
 
 export default function ScheduleList({
   schedules,
-  isLoading,
   isStaff,
 }: ScheduleListProps) {
   const { showModal } = useModalLoader();
 
   const setschedules = useSetAtom(scheduleList);
+  const isLoading = useAtom(loadingState);
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>

@@ -1,36 +1,39 @@
-import { useAtomValue } from "jotai";
-import { servicesState } from "@/state";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useServices } from "@/client/services/service";
+import { useAtom } from "jotai";
+import { serviceList } from "@/state";
 
 interface Props {
   tabIndex?: string;
 }
 
 const ServiceList: FC<Props> = ({ tabIndex }) => {
-  const services = useAtomValue(servicesState);
+  const { data } = useServices({ limit: 20, page: 1 });
+  const [services, setServices] = useAtom(serviceList);
+
+  useEffect(() => {
+    if (!data?.data) return;
+    setServices(data?.data);
+  }, [data, setServices]);
+
   const navigate = useNavigate();
+
   return (
     <div key={tabIndex} className="grid grid-cols-2 gap-3 w-full pt-2">
       {" "}
-      {/* Sửa grid-col-2 thành grid-cols-2 và thêm gap */}
       {services?.map((service) => (
         <div
           key={service.id}
-          className="w-full p-2  border border-[var(--normalBorder)] rounded-lg" // Thêm padding và border cho rõ ràng
-          onClick={() => navigate(`/service-detail/1`)}
+          className="w-full p-2  border border-[var(--normalBorder)] rounded-lg"
+          onClick={() => navigate(`/service-detail/${service.id}`)}
         >
           <img
-            src={service.image}
-            alt={service.label}
+            src={service.image?.path}
+            alt={service.serviceName}
             className="w-full h-[120px] object-cover rounded bg-skeleton"
           />
-          {/* Sử dụng service.name nếu có */}
-          <span className=" text-xs text-subtitle">
-            {" "}
-            {/* Điều chỉnh kích thước text */}
-            {service.label}
-          </span>
+          <span className=" text-xs text-subtitle"> {service.serviceName}</span>
         </div>
       ))}
     </div>

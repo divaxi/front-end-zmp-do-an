@@ -4,299 +4,1142 @@ import type { CancelablePromise } from "./core/CancelablePromise";
 import { OpenAPI } from "./core/OpenAPI";
 import { request as __request } from "./core/request";
 import type {
-  GetByDomainBookieServiceData,
-  GetByDomainBookieServiceResponse,
-  GetByDomainBookieProviderData,
-  GetByDomainBookieProviderResponse,
-  GetByDomainScheduleData,
-  GetByDomainScheduleResponse,
-  GetByDomainCmsDichVuPagingData,
-  GetByDomainCmsDichVuPagingResponse,
-  GetByDomainNewsNewsGroupedByCategoryData,
-  GetByDomainNewsNewsGroupedByCategoryResponse,
-  GetByDomainNewsCategoryData,
-  GetByDomainNewsCategoryResponse,
-  GetByDomainBookieAppointmentPhantrangData,
-  GetByDomainBookieAppointmentPhantrangResponse,
-  GetByDomainBookieBannersData,
-  GetByDomainBookieBannersResponse,
-  GetByDomainCmsdoctorPagingData,
-  GetByDomainCmsdoctorPagingResponse,
-  PostByDomainBookieZaloInfoData,
-  PostByDomainBookieZaloInfoResponse,
+  AppointmentsControllerCreateV1Data,
+  AppointmentsControllerCreateV1Response,
+  AppointmentsControllerFindAllV1Data,
+  AppointmentsControllerFindAllV1Response,
+  AppointmentsControllerCountByCustomerV1Data,
+  AppointmentsControllerCountByCustomerV1Response,
+  AppointmentsControllerCountV1Data,
+  AppointmentsControllerCountV1Response,
+  AppointmentsControllerFindByIdV1Data,
+  AppointmentsControllerFindByIdV1Response,
+  AppointmentsControllerUpdateV1Data,
+  AppointmentsControllerUpdateV1Response,
+  AppointmentsControllerRemoveV1Data,
+  AppointmentsControllerRemoveV1Response,
+  AppointmentServicesControllerFindAllV1Data,
+  AppointmentServicesControllerFindAllV1Response,
+  AppointmentServicesControllerFindByIdV1Data,
+  AppointmentServicesControllerFindByIdV1Response,
+  AppointmentServicesControllerUpdateV1Data,
+  AppointmentServicesControllerUpdateV1Response,
+  AppointmentServicesControllerRemoveV1Data,
+  AppointmentServicesControllerRemoveV1Response,
+  AppointmentServicesControllerFindAppointmentByStaffV1Data,
+  AppointmentServicesControllerFindAppointmentByStaffV1Response,
+  AuthControllerLoginV1Data,
+  AuthControllerLoginV1Response,
+  AuthControllerMeV1Response,
+  AuthControllerRefreshV1Response,
+  AuthControllerLogoutV1Response,
+  ChatbotControllerAskV1Data,
+  ChatbotControllerAskV1Response,
+  CustomerRecordsControllerCreateV1Data,
+  CustomerRecordsControllerCreateV1Response,
+  CustomerRecordsControllerFindAllV1Data,
+  CustomerRecordsControllerFindAllV1Response,
+  CustomerRecordsControllerFindByUserV1Data,
+  CustomerRecordsControllerFindByUserV1Response,
+  CustomerRecordsControllerFindByIdV1Data,
+  CustomerRecordsControllerFindByIdV1Response,
+  CustomerRecordsControllerUpdateV1Data,
+  CustomerRecordsControllerUpdateV1Response,
+  CustomerRecordsControllerRemoveV1Data,
+  CustomerRecordsControllerRemoveV1Response,
+  FilesControllerCreateV1Data,
+  FilesControllerCreateV1Response,
+  FilesLocalControllerUploadFileV1Data,
+  FilesLocalControllerUploadFileV1Response,
+  HomeControllerAppInfoResponse,
+  ReceptionsControllerCreateV1Data,
+  ReceptionsControllerCreateV1Response,
+  ReceptionsControllerFindAllV1Data,
+  ReceptionsControllerFindAllV1Response,
+  ReceptionsControllerFindByIdV1Data,
+  ReceptionsControllerFindByIdV1Response,
+  ReceptionsControllerRemoveV1Data,
+  ReceptionsControllerRemoveV1Response,
+  ReceptionsControllerFindByAppointmentV1Data,
+  ReceptionsControllerFindByAppointmentV1Response,
+  ReceptionsControllerCheckinV1Data,
+  ReceptionsControllerCheckinV1Response,
+  SatisticControllerCountOrderByTimeV1Data,
+  SatisticControllerCountOrderByTimeV1Response,
+  SchedulesControllerCreateV1Data,
+  SchedulesControllerCreateV1Response,
+  SchedulesControllerFindAllV1Data,
+  SchedulesControllerFindAllV1Response,
+  SchedulesControllerFindByDayV1Data,
+  SchedulesControllerFindByDayV1Response,
+  SchedulesControllerFindByIdV1Data,
+  SchedulesControllerFindByIdV1Response,
+  SchedulesControllerUpdateV1Data,
+  SchedulesControllerUpdateV1Response,
+  SchedulesControllerRemoveV1Data,
+  SchedulesControllerRemoveV1Response,
+  SchedulesControllerFindByStaffV1Data,
+  SchedulesControllerFindByStaffV1Response,
+  ServicesControllerCreateV1Data,
+  ServicesControllerCreateV1Response,
+  ServicesControllerFindAllV1Data,
+  ServicesControllerFindAllV1Response,
+  ServicesControllerFindByIdV1Data,
+  ServicesControllerFindByIdV1Response,
+  ServicesControllerUpdateV1Data,
+  ServicesControllerUpdateV1Response,
+  ServicesControllerRemoveV1Data,
+  ServicesControllerRemoveV1Response,
+  StaffsControllerCreateV1Data,
+  StaffsControllerCreateV1Response,
+  StaffsControllerFindAllV1Data,
+  StaffsControllerFindAllV1Response,
+  StaffsControllerFindByIdV1Data,
+  StaffsControllerFindByIdV1Response,
+  StaffsControllerUpdateV1Data,
+  StaffsControllerUpdateV1Response,
+  StaffsControllerRemoveV1Data,
+  StaffsControllerRemoveV1Response,
+  UsersControllerCreateV1Data,
+  UsersControllerCreateV1Response,
+  UsersControllerFindAllV1Data,
+  UsersControllerFindAllV1Response,
+  UsersControllerFindOneV1Data,
+  UsersControllerFindOneV1Response,
+  UsersControllerUpdateV1Data,
+  UsersControllerUpdateV1Response,
+  UsersControllerRemoveV1Data,
+  UsersControllerRemoveV1Response,
 } from "./types.gen";
 
-export class DefaultService {
+export class AppointmentsService {
   /**
-   * Lấy danh sách dịch vụ theo domain
    * @param data The data for the request.
-   * @param data.domain Domain tên miền hệ thống
-   * @returns Service Danh sách dịch vụ
-   * @throws ApiError
-   */
-  public static getByDomainBookieService(
-    data: GetByDomainBookieServiceData
-  ): CancelablePromise<GetByDomainBookieServiceResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/bookie/service",
-      path: {
-        domain: data.domain,
-      },
-    });
-  }
-
-  /**
-   * Lấy danh sách nhà cung cấp theo ID
-   * @param data The data for the request.
-   * @param data.domain Tên miền hệ thống
-   * @param data.strProviderId Danh sách providerId (ngăn cách bằng dấu phẩy)
-   * @param data.viewDetail Hiển thị chi tiết
-   * @returns ProviderListResponse Danh sách nhà cung cấp
-   * @throws ApiError
-   */
-  public static getByDomainBookieProvider(
-    data: GetByDomainBookieProviderData
-  ): CancelablePromise<GetByDomainBookieProviderResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/bookie/provider",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        strProviderId: data.strProviderId,
-        viewDetail: data.viewDetail,
-      },
-    });
-  }
-
-  /**
-   * Lấy lịch khám theo nhà cung cấp & dịch vụ
-   * @param data The data for the request.
-   * @param data.domain Tên miền hệ thống
-   * @param data.idProvider ID nhà cung cấp
-   * @param data.date Ngày lấy lịch (yyyy-MM-dd)
-   * @param data.idService ID dịch vụ (có thể để trống)
-   * @returns ScheduleListResponse Danh sách lịch khám
-   * @throws ApiError
-   */
-  public static getByDomainSchedule(
-    data: GetByDomainScheduleData
-  ): CancelablePromise<GetByDomainScheduleResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/schedule",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        idService: data.idService,
-        idProvider: data.idProvider,
-        date: data.date,
-      },
-    });
-  }
-
-  /**
-   * Lấy danh sách dịch vụ (phân trang)
-   * @param data The data for the request.
-   * @param data.domain Tên miền hệ thống
-   * @param data.page Trang hiện tại
-   * @param data.size Số lượng item mỗi trang
-   * @param data.search Từ khóa tìm kiếm
-   * @returns ServicePagingResponse Danh sách dịch vụ
-   * @throws ApiError
-   */
-  public static getByDomainCmsDichVuPaging(
-    data: GetByDomainCmsDichVuPagingData
-  ): CancelablePromise<GetByDomainCmsDichVuPagingResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/cmsDichVu/paging",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        search: data.search,
-        page: data.page,
-        size: data.size,
-      },
-    });
-  }
-
-  /**
-   * Lấy tin tức theo nhóm chuyên mục
-   * @param data The data for the request.
-   * @param data.domain
-   * @param data.page
-   * @param data.pageSize
-   * @param data.category
-   * @returns unknown Danh sách tin tức nhóm theo chuyên mục
-   * @throws ApiError
-   */
-  public static getByDomainNewsNewsGroupedByCategory(
-    data: GetByDomainNewsNewsGroupedByCategoryData
-  ): CancelablePromise<GetByDomainNewsNewsGroupedByCategoryResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/news/news-grouped-by-category",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        page: data.page,
-        pageSize: data.pageSize,
-        category: data.category,
-      },
-    });
-  }
-
-  /**
-   * Lấy danh sách chuyên mục tin tức
-   * @param data The data for the request.
-   * @param data.domain
-   * @param data.page
-   * @param data.size
-   * @returns unknown Danh sách chuyên mục tin
-   * @throws ApiError
-   */
-  public static getByDomainNewsCategory(
-    data: GetByDomainNewsCategoryData
-  ): CancelablePromise<GetByDomainNewsCategoryResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/NewsCategory",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        page: data.page,
-        size: data.size,
-      },
-    });
-  }
-
-  /**
-   * Lấy danh sách lịch hẹn (phân trang)
-   * @param data The data for the request.
-   * @param data.domain
-   * @param data.search
-   * @param data.date
-   * @param data.filterDate
-   * @param data.trangThai
-   * @param data.providerId
-   * @param data.existMobile
-   * @param data.typeOfAppointment
-   * @param data.page
-   * @param data.pageSize
-   * @param data._from
-   * @param data.to
-   * @returns unknown Danh sách lịch hẹn
-   * @throws ApiError
-   */
-  public static getByDomainBookieAppointmentPhantrang(
-    data: GetByDomainBookieAppointmentPhantrangData
-  ): CancelablePromise<GetByDomainBookieAppointmentPhantrangResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/BookieAppointment/phantrang",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        search: data.search,
-        date: data.date,
-        filterDate: data.filterDate,
-        trangThai: data.trangThai,
-        providerId: data.providerId,
-        existMobile: data.existMobile,
-        typeOfAppointment: data.typeOfAppointment,
-        page: data.page,
-        pageSize: data.pageSize,
-        from: data._from,
-        to: data.to,
-      },
-    });
-  }
-
-  /**
-   * Lấy danh sách banner hiển thị
-   * @param data The data for the request.
-   * @param data.domain Domain hệ thống
-   * @param data.page Trang hiện tại
-   * @param data.pageSize Số lượng item trên mỗi trang
-   * @returns unknown Danh sách banner
-   * @throws ApiError
-   */
-  public static getByDomainBookieBanners(
-    data: GetByDomainBookieBannersData
-  ): CancelablePromise<GetByDomainBookieBannersResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/Bookie/banners",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        page: data.page,
-        pageSize: data.pageSize,
-      },
-    });
-  }
-
-  /**
-   * Lấy danh sách bác sĩ (phân trang)
-   * @param data The data for the request.
-   * @param data.domain Tên miền hệ thống
-   * @param data.page Trang hiện tại
-   * @param data.size Số lượng item mỗi trang
-   * @param data.search Từ khóa tìm kiếm (tùy chọn)
-   * @returns DoctorPagingResponse Danh sách bác sĩ
-   * @throws ApiError
-   */
-  public static getByDomainCmsdoctorPaging(
-    data: GetByDomainCmsdoctorPagingData
-  ): CancelablePromise<GetByDomainCmsdoctorPagingResponse> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/{domain}/cmsdoctor/paging",
-      path: {
-        domain: data.domain,
-      },
-      query: {
-        page: data.page,
-        size: data.size,
-        search: data.search,
-      },
-    });
-  }
-
-  /**
-   * Xác thực người dùng từ Zalo
-   * @param data The data for the request.
-   * @param data.domain
-   * @param data.zaloCode
-   * @param data.token
    * @param data.requestBody
-   * @returns ZaloAuthResponse Thông tin người dùng từ Zalo
+   * @returns Appointment
    * @throws ApiError
    */
-  public static postByDomainBookieZaloInfo(
-    data: PostByDomainBookieZaloInfoData
-  ): CancelablePromise<PostByDomainBookieZaloInfoResponse> {
+  public static appointmentsControllerCreateV1(
+    data: AppointmentsControllerCreateV1Data
+  ): CancelablePromise<AppointmentsControllerCreateV1Response> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/{domain}/Bookie/zaloInfo",
-      path: {
-        domain: data.domain,
-      },
+      url: "/api/v1/appointments",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @param data.startTime
+   * @param data.endTime
+   * @param data.status
+   * @returns InfinityPaginationAppointmentResponseDto
+   * @throws ApiError
+   */
+  public static appointmentsControllerFindAllV1(
+    data: AppointmentsControllerFindAllV1Data = {}
+  ): CancelablePromise<AppointmentsControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointments",
       query: {
-        zaloCode: data.zaloCode,
-        token: data.token,
+        page: data.page,
+        limit: data.limit,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        status: data.status,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.startTime
+   * @param data.endTime
+   * @returns AppointmentSatisticDto
+   * @throws ApiError
+   */
+  public static appointmentsControllerCountByCustomerV1(
+    data: AppointmentsControllerCountByCustomerV1Data
+  ): CancelablePromise<AppointmentsControllerCountByCustomerV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointments/countCustomer",
+      query: {
+        startTime: data.startTime,
+        endTime: data.endTime,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.startTime
+   * @param data.endTime
+   * @returns AppointmentSatisticDto
+   * @throws ApiError
+   */
+  public static appointmentsControllerCountV1(
+    data: AppointmentsControllerCountV1Data
+  ): CancelablePromise<AppointmentsControllerCountV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointments/count",
+      query: {
+        startTime: data.startTime,
+        endTime: data.endTime,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Appointment
+   * @throws ApiError
+   */
+  public static appointmentsControllerFindByIdV1(
+    data: AppointmentsControllerFindByIdV1Data
+  ): CancelablePromise<AppointmentsControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointments/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns Appointment
+   * @throws ApiError
+   */
+  public static appointmentsControllerUpdateV1(
+    data: AppointmentsControllerUpdateV1Data
+  ): CancelablePromise<AppointmentsControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/appointments/{id}",
+      path: {
+        id: data.id,
       },
       body: data.requestBody,
       mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static appointmentsControllerRemoveV1(
+    data: AppointmentsControllerRemoveV1Data
+  ): CancelablePromise<AppointmentsControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/appointments/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+}
+
+export class AppointmentservicesService {
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationAppointmentServiceResponseDto
+   * @throws ApiError
+   */
+  public static appointmentServicesControllerFindAllV1(
+    data: AppointmentServicesControllerFindAllV1Data = {}
+  ): CancelablePromise<AppointmentServicesControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointment-services",
+      query: {
+        page: data.page,
+        limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns AppointmentService
+   * @throws ApiError
+   */
+  public static appointmentServicesControllerFindByIdV1(
+    data: AppointmentServicesControllerFindByIdV1Data
+  ): CancelablePromise<AppointmentServicesControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointment-services/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns AppointmentService
+   * @throws ApiError
+   */
+  public static appointmentServicesControllerUpdateV1(
+    data: AppointmentServicesControllerUpdateV1Data
+  ): CancelablePromise<AppointmentServicesControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/appointment-services/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static appointmentServicesControllerRemoveV1(
+    data: AppointmentServicesControllerRemoveV1Data
+  ): CancelablePromise<AppointmentServicesControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/appointment-services/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.staffId
+   * @returns AppointmentService
+   * @throws ApiError
+   */
+  public static appointmentServicesControllerFindAppointmentByStaffV1(
+    data: AppointmentServicesControllerFindAppointmentByStaffV1Data
+  ): CancelablePromise<AppointmentServicesControllerFindAppointmentByStaffV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointment-services/staff/{staffId}",
+      path: {
+        staffId: data.staffId,
+      },
+    });
+  }
+}
+
+export class AuthService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns LoginResponseDto
+   * @throws ApiError
+   */
+  public static authControllerLoginV1(
+    data: AuthControllerLoginV1Data
+  ): CancelablePromise<AuthControllerLoginV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/auth/zalo/login",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @returns User
+   * @throws ApiError
+   */
+  public static authControllerMeV1(): CancelablePromise<AuthControllerMeV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/auth/me",
+    });
+  }
+
+  /**
+   * @returns RefreshResponseDto
+   * @throws ApiError
+   */
+  public static authControllerRefreshV1(): CancelablePromise<AuthControllerRefreshV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/auth/refresh",
+    });
+  }
+
+  /**
+   * @returns void
+   * @throws ApiError
+   */
+  public static authControllerLogoutV1(): CancelablePromise<AuthControllerLogoutV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/auth/logout",
+    });
+  }
+}
+
+export class ChatbotService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns ChatbotResponseDto
+   * @throws ApiError
+   */
+  public static chatbotControllerAskV1(
+    data: ChatbotControllerAskV1Data
+  ): CancelablePromise<ChatbotControllerAskV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/bot/chat",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+}
+
+export class CustomerrecordsService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns CustomerRecord
+   * @throws ApiError
+   */
+  public static customerRecordsControllerCreateV1(
+    data: CustomerRecordsControllerCreateV1Data
+  ): CancelablePromise<CustomerRecordsControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/customer-records",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationCustomerRecordResponseDto
+   * @throws ApiError
+   */
+  public static customerRecordsControllerFindAllV1(
+    data: CustomerRecordsControllerFindAllV1Data = {}
+  ): CancelablePromise<CustomerRecordsControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/customer-records",
+      query: {
+        page: data.page,
+        limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.userId
+   * @returns CustomerRecord
+   * @throws ApiError
+   */
+  public static customerRecordsControllerFindByUserV1(
+    data: CustomerRecordsControllerFindByUserV1Data
+  ): CancelablePromise<CustomerRecordsControllerFindByUserV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/customer-records/user/{userId}",
+      path: {
+        userId: data.userId,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns CustomerRecord
+   * @throws ApiError
+   */
+  public static customerRecordsControllerFindByIdV1(
+    data: CustomerRecordsControllerFindByIdV1Data
+  ): CancelablePromise<CustomerRecordsControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/customer-records/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns CustomerRecord
+   * @throws ApiError
+   */
+  public static customerRecordsControllerUpdateV1(
+    data: CustomerRecordsControllerUpdateV1Data
+  ): CancelablePromise<CustomerRecordsControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/customer-records/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static customerRecordsControllerRemoveV1(
+    data: CustomerRecordsControllerRemoveV1Data
+  ): CancelablePromise<CustomerRecordsControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/customer-records/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+}
+
+export class FilesService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns FileType
+   * @throws ApiError
+   */
+  public static filesControllerCreateV1(
+    data: FilesControllerCreateV1Data
+  ): CancelablePromise<FilesControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/assign",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.formData
+   * @returns FileResponseDto
+   * @throws ApiError
+   */
+  public static filesLocalControllerUploadFileV1(
+    data: FilesLocalControllerUploadFileV1Data
+  ): CancelablePromise<FilesLocalControllerUploadFileV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/files/upload",
+      formData: data.formData,
+      mediaType: "multipart/form-data",
+    });
+  }
+}
+
+export class HomeService {
+  /**
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static homeControllerAppInfo(): CancelablePromise<HomeControllerAppInfoResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/",
+    });
+  }
+}
+
+export class ReceptionsService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns Reception
+   * @throws ApiError
+   */
+  public static receptionsControllerCreateV1(
+    data: ReceptionsControllerCreateV1Data
+  ): CancelablePromise<ReceptionsControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/receptions",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationReceptionResponseDto
+   * @throws ApiError
+   */
+  public static receptionsControllerFindAllV1(
+    data: ReceptionsControllerFindAllV1Data = {}
+  ): CancelablePromise<ReceptionsControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/receptions",
+      query: {
+        page: data.page,
+        limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Reception
+   * @throws ApiError
+   */
+  public static receptionsControllerFindByIdV1(
+    data: ReceptionsControllerFindByIdV1Data
+  ): CancelablePromise<ReceptionsControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/receptions/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static receptionsControllerRemoveV1(
+    data: ReceptionsControllerRemoveV1Data
+  ): CancelablePromise<ReceptionsControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/receptions/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.appointmentId
+   * @returns Reception
+   * @throws ApiError
+   */
+  public static receptionsControllerFindByAppointmentV1(
+    data: ReceptionsControllerFindByAppointmentV1Data
+  ): CancelablePromise<ReceptionsControllerFindByAppointmentV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/receptions/appointment/{appointmentId}",
+      path: {
+        appointmentId: data.appointmentId,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Reception
+   * @throws ApiError
+   */
+  public static receptionsControllerCheckinV1(
+    data: ReceptionsControllerCheckinV1Data
+  ): CancelablePromise<ReceptionsControllerCheckinV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/receptions/checkin/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+}
+
+export class SatisticService {
+  /**
+   * @param data The data for the request.
+   * @param data.startDate
+   * @param data.endDate
+   * @param data.enumerateBy
+   * @returns EnumerateResponseDto
+   * @throws ApiError
+   */
+  public static satisticControllerCountOrderByTimeV1(
+    data: SatisticControllerCountOrderByTimeV1Data
+  ): CancelablePromise<SatisticControllerCountOrderByTimeV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/satistic/count-order",
+      query: {
+        enumerateBy: data.enumerateBy,
+        startDate: data.startDate,
+        endDate: data.endDate,
+      },
+    });
+  }
+}
+
+export class SchedulesService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns Schedule
+   * @throws ApiError
+   */
+  public static schedulesControllerCreateV1(
+    data: SchedulesControllerCreateV1Data
+  ): CancelablePromise<SchedulesControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/schedules",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationScheduleResponseDto
+   * @throws ApiError
+   */
+  public static schedulesControllerFindAllV1(
+    data: SchedulesControllerFindAllV1Data = {}
+  ): CancelablePromise<SchedulesControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/schedules",
+      query: {
+        page: data.page,
+        limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.date
+   * @returns Schedule
+   * @throws ApiError
+   */
+  public static schedulesControllerFindByDayV1(
+    data: SchedulesControllerFindByDayV1Data
+  ): CancelablePromise<SchedulesControllerFindByDayV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/schedules/by-day",
+      query: {
+        date: data.date,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Schedule
+   * @throws ApiError
+   */
+  public static schedulesControllerFindByIdV1(
+    data: SchedulesControllerFindByIdV1Data
+  ): CancelablePromise<SchedulesControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/schedules/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns Schedule
+   * @throws ApiError
+   */
+  public static schedulesControllerUpdateV1(
+    data: SchedulesControllerUpdateV1Data
+  ): CancelablePromise<SchedulesControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/schedules/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static schedulesControllerRemoveV1(
+    data: SchedulesControllerRemoveV1Data
+  ): CancelablePromise<SchedulesControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/schedules/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.staffId
+   * @returns Schedule
+   * @throws ApiError
+   */
+  public static schedulesControllerFindByStaffV1(
+    data: SchedulesControllerFindByStaffV1Data
+  ): CancelablePromise<SchedulesControllerFindByStaffV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/schedules/staff/{staffId}",
+      path: {
+        staffId: data.staffId,
+      },
+    });
+  }
+}
+
+export class ServicesService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns Service
+   * @throws ApiError
+   */
+  public static servicesControllerCreateV1(
+    data: ServicesControllerCreateV1Data
+  ): CancelablePromise<ServicesControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/services",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationServiceResponseDto
+   * @throws ApiError
+   */
+  public static servicesControllerFindAllV1(
+    data: ServicesControllerFindAllV1Data = {}
+  ): CancelablePromise<ServicesControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/services",
+      query: {
+        page: data.page,
+        limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Service
+   * @throws ApiError
+   */
+  public static servicesControllerFindByIdV1(
+    data: ServicesControllerFindByIdV1Data
+  ): CancelablePromise<ServicesControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/services/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns Service
+   * @throws ApiError
+   */
+  public static servicesControllerUpdateV1(
+    data: ServicesControllerUpdateV1Data
+  ): CancelablePromise<ServicesControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/services/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static servicesControllerRemoveV1(
+    data: ServicesControllerRemoveV1Data
+  ): CancelablePromise<ServicesControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/services/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+}
+
+export class StaffsService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns Staff
+   * @throws ApiError
+   */
+  public static staffsControllerCreateV1(
+    data: StaffsControllerCreateV1Data
+  ): CancelablePromise<StaffsControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/staffs",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationStaffResponseDto
+   * @throws ApiError
+   */
+  public static staffsControllerFindAllV1(
+    data: StaffsControllerFindAllV1Data = {}
+  ): CancelablePromise<StaffsControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/staffs",
+      query: {
+        page: data.page,
+        limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Staff
+   * @throws ApiError
+   */
+  public static staffsControllerFindByIdV1(
+    data: StaffsControllerFindByIdV1Data
+  ): CancelablePromise<StaffsControllerFindByIdV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/staffs/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns Staff
+   * @throws ApiError
+   */
+  public static staffsControllerUpdateV1(
+    data: StaffsControllerUpdateV1Data
+  ): CancelablePromise<StaffsControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/staffs/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown
+   * @throws ApiError
+   */
+  public static staffsControllerRemoveV1(
+    data: StaffsControllerRemoveV1Data
+  ): CancelablePromise<StaffsControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/staffs/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+}
+
+export class UsersService {
+  /**
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns User
+   * @throws ApiError
+   */
+  public static usersControllerCreateV1(
+    data: UsersControllerCreateV1Data
+  ): CancelablePromise<UsersControllerCreateV1Response> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/users",
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.page
+   * @param data.limit
+   * @param data.filters
+   * @param data.sort
+   * @returns InfinityPaginationUserResponseDto
+   * @throws ApiError
+   */
+  public static usersControllerFindAllV1(
+    data: UsersControllerFindAllV1Data = {}
+  ): CancelablePromise<UsersControllerFindAllV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/users",
+      query: {
+        page: data.page,
+        limit: data.limit,
+        filters: data.filters,
+        sort: data.sort,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns User
+   * @throws ApiError
+   */
+  public static usersControllerFindOneV1(
+    data: UsersControllerFindOneV1Data
+  ): CancelablePromise<UsersControllerFindOneV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/users/{id}",
+      path: {
+        id: data.id,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns User
+   * @throws ApiError
+   */
+  public static usersControllerUpdateV1(
+    data: UsersControllerUpdateV1Data
+  ): CancelablePromise<UsersControllerUpdateV1Response> {
+    return __request(OpenAPI, {
+      method: "PATCH",
+      url: "/api/v1/users/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns void
+   * @throws ApiError
+   */
+  public static usersControllerRemoveV1(
+    data: UsersControllerRemoveV1Data
+  ): CancelablePromise<UsersControllerRemoveV1Response> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/users/{id}",
+      path: {
+        id: data.id,
+      },
     });
   }
 }

@@ -30,6 +30,7 @@ export type OpenAPIConfig = {
   HEADERS?: Headers | Resolver<Headers> | undefined;
   PASSWORD?: string | Resolver<string> | undefined;
   TOKEN?: string | Resolver<string> | undefined;
+  REFRESH_TOKEN?: string | Resolver<string> | undefined;
   USERNAME?: string | Resolver<string> | undefined;
   VERSION: string;
   WITH_CREDENTIALS: boolean;
@@ -40,14 +41,15 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-  BASE: "https://apiv3.bookie.vn",
+  BASE: "http://localhost:8000",
   CREDENTIALS: "include",
   ENCODE_PATH: undefined,
   HEADERS: undefined,
   PASSWORD: undefined,
   TOKEN: undefined,
+  REFRESH_TOKEN: undefined,
   USERNAME: undefined,
-  VERSION: "1.0.0",
+  VERSION: "1.0",
   WITH_CREDENTIALS: false,
   interceptors: {
     request: new Interceptors(),

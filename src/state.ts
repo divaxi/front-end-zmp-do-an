@@ -6,6 +6,7 @@ import {
   Category,
   Color,
   CustomerRecord,
+  Message,
   NewsDetail,
   Payment,
   Product,
@@ -20,51 +21,36 @@ import {
   useSWRRequestWithFallback,
 } from "@/utils/request";
 import { atomWithStorage } from "jotai/utils";
-import { ZaloUserResponse } from "./client/api";
+import {
+  LoginResponseDto,
+  ServicesControllerFindAllV1Response,
+} from "./client/api";
 
-const defaultZaloUser: ZaloUserResponse = {
-  Mobile: "",
-  Ten: "",
-  DOB: "",
-  Sex: 0,
-  ImageUrl: null,
-  Email: null,
-  PatientCode: null,
-  FirebaseId: null,
-  JwtToken: "",
-  LoginCount: 0,
-  RefreshToken: "",
-  CCCD: "",
-  BHYT: null,
-  ProvinceId: "",
-  DistrictId: "",
-  WardsId: "",
-  Address: "",
-  Domain: null,
-  PatientId: null,
-  CreateDate: "",
-  UpdateDate: "",
-  Active: false,
-  Id: "",
-};
-
-export const userAtom = atomWithStorage<ZaloUserResponse>(
-  "user",
-  defaultZaloUser
+export const authState = atomWithStorage<LoginResponseDto | undefined>(
+  "authState",
+  undefined
 );
 
-export const authState = atomWithStorage("authState", {
-  isStaff: true,
-  isLogin: false,
-  accessToken: "",
-});
 export const loadingState = atom<boolean>(false);
+
+export const serviceList = atom<ServicesControllerFindAllV1Response["data"]>(
+  []
+);
 
 export const appointmentList = atom<Appointment[]>([]);
 
 export const scheduleList = atom<Schedule[]>([]);
 
 export const customerRecordList = atom<CustomerRecord[]>([]);
+
+export const chatbotMessageList = atom<Message[]>([
+  {
+    id: "1",
+    content:
+      "Xin chào anh/chị! Em là trợ lý ảo của Phòng Khám Nha Khoa 🦷\nAnh/chị muốn đặt lịch hẹn, xem dịch vụ, hoặc cần tư vấn gì ạ?",
+    sender: "bot",
+  },
+]);
 
 export const bannersState = atom(() =>
   requestWithFallback<string[]>("/banners", [])

@@ -58,29 +58,6 @@ const ScheduleCreate: React.FC<ScheduleCreateProps> = ({
     },
   });
 
-  const handleDateChange = (date: string) => {
-    const startTime = form.getValues("startTime");
-    const endTime = form.getValues("endTime");
-
-    if (startTime) {
-      const newStartTime = new Date(startTime);
-      const selectedDate = new Date(date);
-      newStartTime.setFullYear(selectedDate.getFullYear());
-      newStartTime.setMonth(selectedDate.getMonth());
-      newStartTime.setDate(selectedDate.getDate());
-      form.setValue("startTime", newStartTime.toISOString());
-    }
-
-    if (endTime) {
-      const newEndTime = new Date(endTime);
-      const selectedDate = new Date(date);
-      newEndTime.setFullYear(selectedDate.getFullYear());
-      newEndTime.setMonth(selectedDate.getMonth());
-      newEndTime.setDate(selectedDate.getDate());
-      form.setValue("endTime", newEndTime.toISOString());
-    }
-  };
-
   const handleTimeChange = (name: "startTime" | "endTime", time: string) => {
     const date = form.getValues("date");
     if (!date) return;

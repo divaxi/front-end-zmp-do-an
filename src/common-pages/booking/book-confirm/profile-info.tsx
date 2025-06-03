@@ -8,14 +8,16 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 interface props {
   onReadyChange?: (ready: boolean) => void;
 }
 
 const ProfileInfo: FC<props> = ({ onReadyChange }) => {
-  onReadyChange?.(true);
+  useEffect(() => {
+    onReadyChange?.(true);
+  }, [onReadyChange]);
   return (
     <>
       <h2 className="font-medium text-lg text-center pt-3">Thông tin hồ sơ</h2>
