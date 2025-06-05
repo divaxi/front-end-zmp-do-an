@@ -44,67 +44,47 @@ const DateSelect: React.FC<DateSelectProps> = ({
       rules={rules}
       render={({ field }) => {
         const date = field.value ? parseISO(field.value) : null;
-        const hour = date ? date.getHours() : 0;
-        const minute = date ? date.getMinutes() : 0;
 
         const handleDateSelect = (selectedDate: Date | undefined) => {
           if (selectedDate) {
-            const newDate = new Date(selectedDate);
-            newDate.setHours(hour);
-            newDate.setMinutes(minute);
-            field.onChange(newDate.toISOString());
-          }
-        };
-
-        const handleTimeChange = (type: "hour" | "minute", value: string) => {
-          if (date) {
-            const newDate = new Date(date);
-            if (type === "hour") {
-              newDate.setHours(parseInt(value));
-            } else {
-              newDate.setMinutes(parseInt(value));
-            }
-            field.onChange(newDate.toISOString());
+            field.onChange(selectedDate.toISOString());
           }
         };
 
         return (
           <FormItem className="flex flex-col">
             {label && <FormLabel>{label}</FormLabel>}
-            <div className="flex flex-col gap-2">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      className={cn(
-                        "w-full pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground",
-                        disabled &&
-                          "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      )}
-                      disabled={disabled}
-                    >
-                      {field.value ? (
-                        format(parseISO(field.value), "PPP")
-                      ) : (
-                        <span>Chọn ngày</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={date || undefined}
-                    onSelect={handleDateSelect}
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full pl-3 text-left font-normal",
+                      !field.value && "text-muted-foreground",
+                      disabled && "bg-gray-100 text-gray-400 cursor-not-allowed"
+                    )}
                     disabled={disabled}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
+                  >
+                    {field.value ? (
+                      format(parseISO(field.value), "PPP")
+                    ) : (
+                      <span>Chọn ngày</span>
+                    )}
+                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date || undefined}
+                  onSelect={handleDateSelect}
+                  disabled={disabled}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
             <FormMessage />
           </FormItem>
         );

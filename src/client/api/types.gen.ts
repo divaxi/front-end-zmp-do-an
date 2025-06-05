@@ -352,6 +352,7 @@ export type AppointmentsControllerFindAllV1Data = {
   page?: number;
   startTime?: string;
   status?: string;
+  userId: number;
 };
 
 export type AppointmentsControllerFindAllV1Response =
@@ -555,6 +556,7 @@ export type SchedulesControllerCreateV1Response = Schedule;
 export type SchedulesControllerFindAllV1Data = {
   limit?: number;
   page?: number;
+  staffId: string;
 };
 
 export type SchedulesControllerFindAllV1Response =
@@ -637,6 +639,12 @@ export type StaffsControllerFindAllV1Data = {
 
 export type StaffsControllerFindAllV1Response =
   InfinityPaginationStaffResponseDto;
+
+export type StaffsControllerFindByUserV1Data = {
+  id: number;
+};
+
+export type StaffsControllerFindByUserV1Response = Staff;
 
 export type StaffsControllerFindByIdV1Data = {
   id: string;

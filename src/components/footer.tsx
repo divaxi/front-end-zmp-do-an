@@ -9,13 +9,17 @@ import HorizontalDivider from "./horizontal-divider";
 import TransitionLink from "./transition-link";
 import { useAtomValue } from "jotai";
 import { authState } from "@/state";
-import { RoleEnum } from "@/utils/enum";
 
 const CustomerOnly = [
   {
     name: "Chatbot",
     path: "/chatbot",
     icon: ChatbotIcon,
+  },
+  {
+    name: "Lịch hẹn",
+    path: "/appointment",
+    icon: BookIcon,
   },
 ];
 
@@ -25,6 +29,11 @@ const StaffOnly = [
     path: "/satistic",
     icon: SatisticIcon,
   },
+  {
+    name: "Lịch hẹn",
+    path: "/appointment-staff",
+    icon: BookIcon,
+  },
 ];
 
 const NAV_ITEMS = [
@@ -32,11 +41,6 @@ const NAV_ITEMS = [
     name: "Trang chủ",
     path: "/",
     icon: HomeIcon,
-  },
-  {
-    name: "Lịch hẹn",
-    path: "/appointment",
-    icon: BookIcon,
   },
 
   // {
@@ -67,8 +71,7 @@ const NAV_ITEMS = [
 
 export default function Footer() {
   const auth = useAtomValue(authState);
-  const isStaff = auth?.user.role.id === RoleEnum.staff;
-  const items = isStaff
+  const items = !!auth?.staff
     ? [...NAV_ITEMS, ...StaffOnly]
     : [...NAV_ITEMS, ...CustomerOnly];
   return (

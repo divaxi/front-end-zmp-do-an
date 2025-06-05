@@ -1,9 +1,11 @@
 import HorizontalDivider from "@/components/horizontal-divider";
 import { LoadingSpinner } from "./loading-spinner";
 import { NoData } from "./no-data";
-import { Appointment } from "@/types";
 import StatusComponent from "./status-component";
-import { APPOINTMENT_STATUS_TEXT } from "@/constants/appointment";
+import {
+  APPOINTMENT_STATUS,
+  APPOINTMENT_STATUS_TEXT,
+} from "@/constants/appointment";
 import { useModalLoader } from "@/provider/ModalProvider";
 import { useForm } from "react-hook-form";
 import AppointmentStatusConfirmModal from "./modal/appointment-status-confirm";
@@ -12,11 +14,13 @@ import { appointmentList, loadingState } from "@/state";
 import { CheckIcon, LucideTrash2 } from "lucide-react";
 import AppointmentDeleteConfirmModal from "./modal/appointment-delete-confirm";
 import ReceptionModal from "./modal/reception-modal";
+import { AppointmentsControllerFindAllV1Response } from "@/client/api";
+import { format } from "date-fns";
 
 type Status = keyof typeof APPOINTMENT_STATUS_TEXT;
 
 type AppointmentListProps = {
-  appointments: Appointment[];
+  appointments?: AppointmentsControllerFindAllV1Response["data"];
   isStaff?: boolean;
 };
 
@@ -28,7 +32,7 @@ export default function AppointmentList({
   const isLoading = useAtomValue(loadingState);
 
   const { control, setValue } = useForm<Record<string, { status: Status }>>({
-    defaultValues: appointments.reduce(
+    defaultValues: appointments?.reduce(
       (acc, appt) => {
         acc[appt.id] = { status: appt.status as Status };
         return acc;
@@ -47,17 +51,22 @@ export default function AppointmentList({
         )}
         {!isLoading &&
           appointments?.map((appointment) => (
-            <div key={appointment.id} className="flex flex-col gap-2 w-full">
+            <div key={appointment.id} className="flex flex-col gap-3 w-full">
               <div className="flex flex-row justify-between pb-2">
                 <div>
-                  <h1 className="text-base font-[550]">{appointment.date}</h1>
+                  <h1 className="text-base font-[550]">
+                    {format(appointment.specificTime, "dd-MM-yyyy")}
+                  </h1>
                   <span className="italic text-2xs text-subtitle">
-                    {appointment.doctor}
+                    {appointment.note}
                   </span>
-                  <h2 className="text-xs ">Khách hàng: {appointment.doctor}</h2>
-                  <span className="text-2xs text-subtitle">
+
+                  <h2 className="text-xs ">
+                    Khách hàng: {appointment.customerRecord.fullName}
+                  </h2>
+                  {/* <span className="text-2xs text-subtitle">
                     {appointment?.checkinTime || "Chưa checkin"}
-                  </span>
+                  </span> */}
                 </div>
                 <div className="flex flex-col self-start items-center">
                   <StatusComponent
@@ -77,7 +86,7 @@ export default function AppointmentList({
                       );
                     }}
                   />
-                  {appointment.status === "ThemMoi" && (
+                  {appointment.status === APPOINTMENT_STATUS.scheduled && (
                     <>
                       {!isStaff ? (
                         <LucideTrash2
@@ -85,7 +94,7 @@ export default function AppointmentList({
                           onClick={() => {
                             showModal(
                               <AppointmentDeleteConfirmModal
-                                dateTime={appointment.date}
+                                dateTime={appointment.specificTime}
                                 execute={() => {
                                   setAppointments(
                                     appointments.filter(

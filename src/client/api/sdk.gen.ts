@@ -94,6 +94,8 @@ import type {
   StaffsControllerCreateV1Response,
   StaffsControllerFindAllV1Data,
   StaffsControllerFindAllV1Response,
+  StaffsControllerFindByUserV1Data,
+  StaffsControllerFindByUserV1Response,
   StaffsControllerFindByIdV1Data,
   StaffsControllerFindByIdV1Response,
   StaffsControllerUpdateV1Data,
@@ -132,6 +134,7 @@ export class AppointmentsService {
 
   /**
    * @param data The data for the request.
+   * @param data.userId
    * @param data.page
    * @param data.limit
    * @param data.startTime
@@ -141,7 +144,7 @@ export class AppointmentsService {
    * @throws ApiError
    */
   public static appointmentsControllerFindAllV1(
-    data: AppointmentsControllerFindAllV1Data = {}
+    data: AppointmentsControllerFindAllV1Data
   ): CancelablePromise<AppointmentsControllerFindAllV1Response> {
     return __request(OpenAPI, {
       method: "GET",
@@ -152,6 +155,7 @@ export class AppointmentsService {
         startTime: data.startTime,
         endTime: data.endTime,
         status: data.status,
+        userId: data.userId,
       },
     });
   }
@@ -740,13 +744,14 @@ export class SchedulesService {
 
   /**
    * @param data The data for the request.
+   * @param data.staffId
    * @param data.page
    * @param data.limit
    * @returns InfinityPaginationScheduleResponseDto
    * @throws ApiError
    */
   public static schedulesControllerFindAllV1(
-    data: SchedulesControllerFindAllV1Data = {}
+    data: SchedulesControllerFindAllV1Data
   ): CancelablePromise<SchedulesControllerFindAllV1Response> {
     return __request(OpenAPI, {
       method: "GET",
@@ -754,6 +759,7 @@ export class SchedulesService {
       query: {
         page: data.page,
         limit: data.limit,
+        staffId: data.staffId,
       },
     });
   }
@@ -982,6 +988,24 @@ export class StaffsService {
       query: {
         page: data.page,
         limit: data.limit,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Staff
+   * @throws ApiError
+   */
+  public static staffsControllerFindByUserV1(
+    data: StaffsControllerFindByUserV1Data
+  ): CancelablePromise<StaffsControllerFindByUserV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/staffs/user/{id}",
+      path: {
+        id: data.id,
       },
     });
   }

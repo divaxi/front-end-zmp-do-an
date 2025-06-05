@@ -5,12 +5,10 @@ import {
   Cart,
   Category,
   Color,
-  CustomerRecord,
   Message,
   NewsDetail,
   Payment,
   Product,
-  Schedule,
   Service,
   ServiceCategory,
   ServiceDetail,
@@ -22,12 +20,23 @@ import {
 } from "@/utils/request";
 import { atomWithStorage } from "jotai/utils";
 import {
-  LoginResponseDto,
   ServicesControllerFindAllV1Response,
+  AppointmentsControllerFindAllV1Response,
+  AuthControllerLoginV1Response,
+  CustomerRecordsControllerFindByUserV1Response,
+  StaffsControllerFindByIdV1Response,
+  SchedulesControllerFindAllV1Response,
 } from "./client/api";
 
-export const authState = atomWithStorage<LoginResponseDto | undefined>(
-  "authState",
+export const authState = atomWithStorage<
+  | {
+      auth: AuthControllerLoginV1Response | undefined;
+      staff: StaffsControllerFindByIdV1Response | undefined;
+    }
+  | undefined
+>("authState", undefined);
+
+export const staffState = atom<StaffsControllerFindByIdV1Response | undefined>(
   undefined
 );
 
@@ -37,11 +46,16 @@ export const serviceList = atom<ServicesControllerFindAllV1Response["data"]>(
   []
 );
 
-export const appointmentList = atom<Appointment[]>([]);
+export const appointmentList = atom<
+  AppointmentsControllerFindAllV1Response["data"]
+>([]);
 
-export const scheduleList = atom<Schedule[]>([]);
+export const scheduleList = atom<SchedulesControllerFindAllV1Response["data"]>(
+  []
+);
 
-export const customerRecordList = atom<CustomerRecord[]>([]);
+export const customerRecordList =
+  atom<CustomerRecordsControllerFindByUserV1Response>([]);
 
 export const chatbotMessageList = atom<Message[]>([
   {

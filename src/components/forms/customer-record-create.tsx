@@ -27,9 +27,7 @@ const customerRecordSchema = z.object({
   BHYTNumber: z.string().nullable().optional(),
 });
 
-type CustomerRecordFormValues = z.infer<typeof customerRecordSchema>;
-
-export type { CustomerRecordFormValues };
+export type CustomerRecordFormValues = z.infer<typeof customerRecordSchema>;
 
 interface CustomerRecordCreateProps {
   onSubmit: (data: CustomerRecordFormValues) => void;

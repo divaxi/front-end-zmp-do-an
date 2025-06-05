@@ -32,7 +32,7 @@ export default function ServiceCategoryCard({
       </p>{" "}
       {/* Description */}
       <button
-        onClick={() => { }} // Gọi hàm xử lý khi click
+        onClick={() => {}} // Gọi hàm xử lý khi click
         // Sử dụng màu teal tương tự ảnh, có thể thay bằng màu primary của bạn nếu muốn
         className="bg-[#0891B2] hover:bg-[#0E7490] text-white text-sm font-medium py-1.5 px-5 rounded-full transition-colors"
       >

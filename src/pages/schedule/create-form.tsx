@@ -6,56 +6,44 @@ import type { ScheduleFormValues } from "@/components/forms/schedule-create";
 import { useModalLoader } from "@/provider/ModalProvider";
 import CustomerRecordCreateModal from "@/components/modal/customer-record-create";
 import { useSnackbar } from "zmp-ui";
-import { useSetAtom } from "jotai";
-import { loadingState } from "@/state";
+import { useAtomValue, useSetAtom } from "jotai";
+import { authState, loadingState } from "@/state";
+import { postCreateSchedule } from "@/client/services/schedule";
 
 const ScheduleCreatePage: React.FC = () => {
   const navigate = useNavigate();
   const { showModal } = useModalLoader();
   const { openSnackbar } = useSnackbar();
   const setLoading = useSetAtom(loadingState);
+  const staffId = useAtomValue(authState)?.staff?.id;
 
   const handleSubmit = async (data: ScheduleFormValues) => {
     try {
-      console.log("data", data);
       showModal(
         <CustomerRecordCreateModal
           execute={async () => {
+            setLoading(true);
             try {
-              setLoading(true);
-              // ⏳ Mô phỏng độ trễ 1.2 giây
-              await new Promise((resolve) => setTimeout(resolve, 1200));
-
-              const response = await fetch("/api/schedule", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
+              await postCreateSchedule({
+                requestBody: {
+                  staff: { id: staffId as string },
+                  endTime: data.endTime,
+                  startTime: data.startTime,
+                  note: data?.note as string | undefined,
                 },
-                body: JSON.stringify(data),
               });
-
-              if (!response.ok) {
-                throw new Error("Failed to create schedule");
-              }
-
-              const result = await response.json();
-              console.log("API response:", result);
-
               openSnackbar({
                 type: "success",
-                text: "Tạo lịch hẹn thành công",
-                duration: 2000,
+                text: "Tạo lịch làm việc thành công",
               });
-              navigate("/schedule");
-            } catch (err) {
+            } catch (error) {
               openSnackbar({
                 type: "error",
-                text: "Có lỗi khi tạo lịch hẹn",
-                duration: 2000,
+                text: "Lỗi tạo lịch làm việc",
               });
-              console.error("API error:", err);
             } finally {
               setLoading(false);
+              navigate("/schedule");
             }
           }}
         />
@@ -69,7 +57,10 @@ const ScheduleCreatePage: React.FC = () => {
     <div className="container mx-auto py-6">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg p-6">
-          <ScheduleCreate onSubmit={handleSubmit} />
+          <ScheduleCreate
+            defaultValues={{ date: new Date().toISOString() }}
+            onSubmit={handleSubmit}
+          />
         </div>
       </div>
     </div>

@@ -13,7 +13,8 @@ import { ProtectedRoute } from "@/components/protected-route";
 import PaymentPage from "@/components/payment-list";
 import ServiceDetailPage from "@/components/service/service-detail";
 import NewsDetailPage from "@/components/news/news-detail";
-import AppointmentPage from "./pages/appointment";
+import AppointmentPage from "./pages/appointment/index-customer";
+import AppointmentStaffPage from "./pages/appointment/index-staff";
 import ServicePage from "@/components/service/service-tabs";
 import TreatmentPage from "@/components/treatment-list";
 import BookConfirmPage from "@/common-pages/booking/book-confirm";
@@ -43,6 +44,17 @@ export const router = createBrowserRouter(
           element: (
             <ProtectedRoute>
               <AppointmentPage />
+            </ProtectedRoute>
+          ),
+          handle: {
+            title: "Lịch hẹn",
+          },
+        },
+        {
+          path: "/appointment-staff",
+          element: (
+            <ProtectedRoute>
+              <AppointmentStaffPage />
             </ProtectedRoute>
           ),
           handle: {
@@ -161,21 +173,21 @@ export const router = createBrowserRouter(
           path: "/schedule",
           element: <SchedulePage />,
           handle: {
-            title: "Lịch hẹn",
+            title: "Lịch làm việc",
           },
         },
         {
           path: "/schedule/create",
           element: <ScheduleCreatePage />,
           handle: {
-            title: "Thêm lịch hẹn",
+            title: "Thêm lịch làm việc",
           },
         },
         {
           path: "/schedule/update/:id",
           element: <ScheduleUpdatePage />,
           handle: {
-            title: "Cập nhật lịch hẹn",
+            title: "Cập nhật lịch làm việc",
           },
         },
         {
