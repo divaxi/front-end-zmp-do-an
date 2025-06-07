@@ -3,6 +3,7 @@ import useSWR from "swr";
 import {
   SchedulesControllerCreateV1Data,
   SchedulesControllerFindAllV1Data,
+  SchedulesControllerFindByDayV1Data,
   SchedulesControllerRemoveV1Data,
   SchedulesControllerUpdateV1Data,
 } from "../api";
@@ -44,4 +45,25 @@ export const postUpdateSchedule = async (
 
 export const deleteSchedule = async (id: SchedulesControllerRemoveV1Data) => {
   await SchedulesService.schedulesControllerRemoveV1(id);
+};
+
+const fetchScheduleByDay = async (
+  query: SchedulesControllerFindByDayV1Data
+) => {
+  return await SchedulesService.schedulesControllerFindByDayV1(query);
+};
+export const useScheduleByDay = ({
+  date,
+}: SchedulesControllerFindByDayV1Data) => {
+  const { data, error, isLoading, mutate } = useSWR(
+    ["schedule-day", date],
+    () => fetchScheduleByDay({ date })
+  );
+
+  return {
+    data,
+    error,
+    isLoading,
+    mutate,
+  };
 };

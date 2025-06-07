@@ -7,7 +7,7 @@ export default function ServiceSection() {
   const navigate = useNavigate();
   const { data: services } = useServices({ limit: 6, page: 1 });
   return (
-    <div className="px-4 pb-4">
+    <div className="px-4 pb-4 pt-6">
       <div className="flex justify-between items-center mb-3">
         <h2 className="text-base font-bold">Dịch vụ</h2>
         <Button

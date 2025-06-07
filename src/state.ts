@@ -21,7 +21,7 @@ import {
 import { atomWithStorage } from "jotai/utils";
 import {
   ServicesControllerFindAllV1Response,
-  AppointmentsControllerFindAllV1Response,
+  AppointmentsControllerFindAllByStaffV1Response,
   AuthControllerLoginV1Response,
   CustomerRecordsControllerFindByUserV1Response,
   StaffsControllerFindByIdV1Response,
@@ -47,7 +47,7 @@ export const serviceList = atom<ServicesControllerFindAllV1Response["data"]>(
 );
 
 export const appointmentList = atom<
-  AppointmentsControllerFindAllV1Response["data"]
+  AppointmentsControllerFindAllByStaffV1Response["data"]
 >([]);
 
 export const scheduleList = atom<SchedulesControllerFindAllV1Response["data"]>(

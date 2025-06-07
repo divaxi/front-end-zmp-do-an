@@ -1,8 +1,14 @@
 import { FunctionComponent } from "react";
 import { Modal, useSnackbar } from "zmp-ui";
 import { useModalLoader } from "@/provider/ModalProvider";
+import { AppointmentsControllerCreateV1Data } from "@/client/api";
+import { postCreateAppointment } from "@/client/services/appointment";
+interface Props {
+  appointment: AppointmentsControllerCreateV1Data["requestBody"];
+  navigate: () => void;
+}
 
-const ConfirmModal: FunctionComponent = () => {
+const ConfirmModal: FunctionComponent<Props> = ({ appointment, navigate }) => {
   const { modalOpen, hideModal } = useModalLoader();
   const { openSnackbar } = useSnackbar();
   return (
@@ -18,13 +24,25 @@ const ConfirmModal: FunctionComponent = () => {
           highLight: true,
           className: "confirm-book",
           onClick: () => {
-            openSnackbar({
-              position: "top",
-              type: "success",
-              text: "Đặt lịch hẹn thành công",
-              duration: 2000,
-            });
+            postCreateAppointment({ requestBody: appointment })
+              .then((res) => {
+                openSnackbar({
+                  position: "bottom",
+                  type: "success",
+                  text: "Đặt lịch hẹn thành công",
+                  duration: 2000,
+                });
+              })
+              .catch(() => {
+                openSnackbar({
+                  position: "bottom",
+                  type: "error",
+                  text: "Đặt lịch hẹn thất bại",
+                  duration: 2000,
+                });
+              });
             hideModal();
+            navigate();
           },
         },
         {

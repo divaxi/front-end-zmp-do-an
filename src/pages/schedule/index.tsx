@@ -14,6 +14,7 @@ const SchedulePage: React.FC = () => {
 
   const { data } = useSchedules({ staffId: staff?.id as string });
 
+
   useEffect(() => {
     if (!data) return;
     setSchedule(data.data);

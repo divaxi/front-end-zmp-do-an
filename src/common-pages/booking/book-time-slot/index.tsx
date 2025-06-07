@@ -1,156 +1,153 @@
-// import { useBookingTimeSchedule } from "@/client/services/booking";
-// import { formatMinutesToHourString } from "@/utils/date";
-import React, { useState } from "react";
-import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
-import { Page, Icon, Button } from "zmp-ui";
+import { useScheduleByDay } from "@/client/services/schedule";
+import Button from "@/components/button";
+import { scheduleList } from "@/state";
+import { format, startOfDay } from "date-fns";
+import { useAtom } from "jotai";
+import React, { useEffect, useState, useCallback } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { Page, Icon, DatePicker, useSnackbar } from "zmp-ui";
+import { Schedule } from "@/client/api";
 
 export default function BookTimeSlotPage() {
-  const [searchParams] = useSearchParams();
+  // Hooks
   const location = useLocation();
   const navigate = useNavigate();
+  const { serviceId } = useParams();
+  const { openSnackbar } = useSnackbar();
+  const [schedule, setSchedule] = useAtom(scheduleList);
+
+  // State
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedTime, setSelectedTime] = useState<Schedule | null>(null);
+
+  // Derived state
   const serviceName = location?.state?.serviceName;
-  const providerName = location?.state?.providerName;
 
-  const serviceId = searchParams.get("serviceId");
-  const providerId = searchParams.get("providerId");
-  // const { data: availableTimes, isLoading } = useBookingTimeSchedule(
-  //   providerId || ""
-  // );
+  // Data fetching
+  const { data, isLoading, error } = useScheduleByDay({
+    date: startOfDay(selectedDate).toISOString(),
+  });
 
-  // For now, hardcode the date. In a real app, you"d use a date picker.
-  const [selectedDate] = useState<string>("2025-03-15"); // YYYY-MM-DD format
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const handleEditService = () => {
-    navigate("/booking");
-  };
+  // Effects
+  useEffect(() => {
+    if (!data) return;
+    setSchedule(data);
+  }, [data, setSchedule]);
 
-  const handleEditProvider = () => {
-    // Navigate back to provider selection for the current service
-    navigate(`/booking/provider/${serviceId}`);
-  };
-
-  const handleTimeSelect = (time: string) => {
-    setSelectedTime(time);
-  };
-
-  const handleContinue = () => {
-    if (selectedTime) {
-      console.log("Booking details:", {
-        serviceId,
-        providerId,
-        date: selectedDate,
-        time: selectedTime,
+  useEffect(() => {
+    if (error) {
+      openSnackbar({
+        type: "error",
+        text: "Không thể tải lịch. Vui lòng thử lại sau.",
       });
-      // Navigate to the next step (e.g., confirmation page)
-      // Pass data via state or query params as needed
-      navigate(`/booking/book-confirm`);
-    } else {
-      // Optionally show a message to select a time
-      console.log("Please select a time slot.");
     }
-  };
+  }, [error, openSnackbar]);
 
-  // Helper to format the date for display (e.g., "Thứ Hai, ngày 15/03/2025")
-  const formatDateDisplay = (dateString: string): string => {
-    try {
-      const dateObj = new Date(dateString + "T00:00:00"); // Add time part to avoid timezone issues
-      const dayOfWeek = [
-        "Chủ Nhật",
-        "Thứ Hai",
-        "Thứ Ba",
-        "Thứ Tư",
-        "Thứ Năm",
-        "Thứ Sáu",
-        "Thứ Bảy",
-      ][dateObj.getDay()];
-      const day = String(dateObj.getDate()).padStart(2, "0");
-      const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-      const year = dateObj.getFullYear();
-      return `${dayOfWeek}, ngày ${day}/${month}/${year}`;
-    } catch (e) {
-      console.error("Error formatting date:", e);
-      return dateString; // Fallback to original string
+  // Event handlers
+  const handleEditService = useCallback(() => {
+    navigate("/booking");
+  }, [navigate]);
+
+  const handleTimeSelect = useCallback((time: Schedule) => {
+    setSelectedTime(time);
+  }, []);
+
+  const handleContinue = useCallback(() => {
+    if (!selectedTime) {
+      openSnackbar({
+        type: "warning",
+        text: "Vui lòng chọn thời gian",
+      });
+      return;
     }
+    navigate(`/booking/book-confirm/${serviceId}/${selectedTime.id}`);
+  }, [selectedTime, serviceId, navigate, openSnackbar]);
+
+  // Render helpers
+  const renderTimeSlots = () => {
+    if (isLoading) {
+      return (
+        <div className="text-center text-gray-500 mt-8">Đang tải lịch...</div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className="text-center text-red-500 mt-8">
+          Có lỗi xảy ra khi tải lịch
+        </div>
+      );
+    }
+
+    if (!schedule || schedule.length === 0) {
+      return (
+        <div className="text-center text-gray-500 mt-8">
+          Không có lịch trống cho ngày này.
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-4 gap-3">
+        {schedule.map((time) => (
+          <button
+            key={time.id}
+            onClick={() => handleTimeSelect(time)}
+            className={`rounded p-2 text-center text-sm cursor-pointer border transition-colors ${
+              selectedTime?.startTime === time.startTime?.toString()
+                ? "bg-[#0891B2] text-white border-[#0891B2] font-medium"
+                : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+            }`}
+            aria-selected={
+              selectedTime?.startTime === time.startTime?.toString()
+            }
+          >
+            {format(new Date(time.startTime), "HH:mm")}
+          </button>
+        ))}
+      </div>
+    );
   };
 
   return (
     <Page className="flex flex-col bg-gray-100">
-      {/* Header with selected Service and Provider */}
+      {/* Header */}
       <div className="bg-white rounded-lg shadow p-4 m-4 mb-0 flex flex-col space-y-2 sticky top-0 z-10 border-b border-gray-100">
-        {/* Service */}
         <div className="flex justify-between items-center">
           <span className="text-sm text-gray-600">
             Dịch vụ: <strong className="text-gray-800">{serviceName}</strong>
           </span>
           <button
             onClick={handleEditService}
-            className="text-gray-400 hover:text-gray-600 p-1"
-          >
-            <Icon icon="zi-edit" className="w-5 h-5" />
-          </button>
-        </div>
-        {/* Provider */}
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-600">
-            Bác sĩ: <strong className="text-gray-800">{providerName}</strong>
-          </span>
-          <button
-            onClick={handleEditProvider}
-            className="text-gray-400 hover:text-gray-600 p-1"
+            className="text-gray-400 hover:text-gray-600 p-1 transition-colors"
+            aria-label="Chỉnh sửa dịch vụ"
           >
             <Icon icon="zi-edit" className="w-5 h-5" />
           </button>
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-grow p-4 overflow-y-auto">
-        {/* Date Display/Selector (Placeholder) */}
-        {/* In a real app, replace this with a Calendar component */}
-        <div className="bg-gray-600 text-white rounded-lg p-2 text-sm text-center mx-auto my-4 max-w-xs shadow">
-          {formatDateDisplay(selectedDate)}
+      {/* Main Content */}
+      <div className="flex flex-col p-4 overflow-y-auto">
+        <div className="bg-white rounded-lg p-4 mb-4">
+          <DatePicker
+            label="Chọn ngày"
+            onChange={setSelectedDate}
+            value={selectedDate}
+          />
         </div>
 
-        {/* {isLoading ? ( */}
-        {/*   <div className="text-center text-gray-500 mt-8">Đang tải lịch...</div> */}
-        {/* ) : !availableTimes || availableTimes?.length > 0 ? ( */}
-        {/*   <div className="grid grid-cols-4 gap-3"> */}
-        {/*     {availableTimes?.map((time) => ( */}
-        {/*       <button */}
-        {/*         key={time.Id} */}
-        {/*         onClick={() => */}
-        {/*           handleTimeSelect(time.FromTime?.toString() || "") */}
-        {/*         } */}
-        {/*         className={`rounded p-2 text-center text-sm cursor-pointer border transition-colors ${ */}
-        {/*           selectedTime === time.FromTime?.toString() */}
-        {/*             ? "bg-[#0891B2] text-white border-[#0891B2] font-medium" // Teal color for selected */}
-        {/*             : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50" */}
-        {/*         }`} */}
-        {/*       > */}
-        {/*         {formatMinutesToHourString(time.FromTime || 0)} */}
-        {/*       </button> */}
-        {/*     ))} */}
-        {/*   </div> */}
-        {/* ) : ( */}
-        {/*   <div className="text-center text-gray-500 mt-8"> */}
-        {/*     Không có lịch trống cho ngày này. */}
-        {/*   </div> */}
-        {/* )} */}
+        {renderTimeSlots()}
       </div>
 
-      {/* Footer Button */}
-      <div className="p-4 sticky bottom-200 bg-gray-100 border-t border-gray-200">
+      {/* Footer */}
+      <div className="p-4 bottom-200 bg-gray-100 border-t border-gray-200">
         <Button
-          fullWidth
+          type="button"
+          primary
+          className="w-full bg-primary hover:bg-primary-dark active:bg-primary-dark transition-colors duration-200"
           onClick={handleContinue}
-          // disabled={!selectedTime || isLoading}
-          // className={`bg-[#86D1D7] hover:bg-[#6ABEC3] text-white font-medium ${!selectedTime || isLoading ? "opacity-50 cursor-not-allowed" : ""}`} // Custom color similar to image
-          style={
-            {
-              "--zmp-button-bg-color": "#86D1D7",
-              "--zmp-button-hover-bg-color": "#6ABEC3",
-            } as React.CSSProperties
-          } // Override ZMP UI default primary
+          disabled={!selectedTime}
         >
           Tiếp tục
         </Button>

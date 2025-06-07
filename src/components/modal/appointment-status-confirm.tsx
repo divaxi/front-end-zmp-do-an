@@ -1,18 +1,24 @@
 import React, { FunctionComponent } from "react";
-import { Modal } from "zmp-ui";
+import { Modal, useSnackbar } from "zmp-ui";
 import { useModalLoader } from "@/provider/ModalProvider";
 import { APPOINTMENT_STATUS_TEXT } from "@/constants/appointment";
+import { postUpdateAppointment } from "@/client/services/appointment";
+import { Appointment } from "@/client/api";
 
 interface props {
-  status: keyof typeof APPOINTMENT_STATUS_TEXT;
+  newStatus: keyof typeof APPOINTMENT_STATUS_TEXT;
+  appointment: Appointment;
   execute: () => void;
 }
 
 const AppointmentStatusConfirmModal: FunctionComponent<props> = ({
-  status,
+  newStatus,
+  appointment,
   execute,
 }) => {
   const { modalOpen, hideModal } = useModalLoader();
+  const { openSnackbar } = useSnackbar();
+  console.log(newStatus);
   return (
     <Modal
       visible={modalOpen}
@@ -24,9 +30,26 @@ const AppointmentStatusConfirmModal: FunctionComponent<props> = ({
         {
           text: "Xác nhận",
           highLight: true,
-          className: "logout-text",
           onClick: () => {
-            execute();
+            postUpdateAppointment({
+              id: appointment.id,
+              requestBody: {
+                status: newStatus,
+              },
+            })
+              .then(() => {
+                execute();
+                openSnackbar({
+                  text: "Thay đổi trạng thái thành công",
+                  type: "success",
+                });
+              })
+              .catch(() => {
+                openSnackbar({
+                  text: "Lỗi xảy ra, vui lòng thử lại",
+                  type: "error",
+                });
+              });
             hideModal();
           },
         },
@@ -35,7 +58,7 @@ const AppointmentStatusConfirmModal: FunctionComponent<props> = ({
           close: true,
         },
       ]}
-      description={`Bạn có chắc chắn thay đổi trạng thái cuộc hẹn thành "${APPOINTMENT_STATUS_TEXT[status]}"`}
+      description={`Bạn có chắc chắn thay đổi trạng thái cuộc hẹn thành "${APPOINTMENT_STATUS_TEXT[newStatus]}"`}
     />
   );
 };

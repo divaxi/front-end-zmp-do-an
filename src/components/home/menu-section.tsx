@@ -39,7 +39,7 @@ const MenuSection: FC<props> = ({ extras = [] }) => {
           />
         </svg>
       ),
-      path: "/appointment",
+      path: "/appointment-staff",
     },
 
     {
@@ -52,7 +52,7 @@ const MenuSection: FC<props> = ({ extras = [] }) => {
       id: "satistic",
       name: "Thống kê",
       icon: <ChartLineIcon className="text-iconStroke scale-125" />,
-      path: "/treatment",
+      path: "/statistic",
     },
   ];
   const categories = [...defaulCategories, ...extras];

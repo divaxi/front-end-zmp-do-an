@@ -6,8 +6,10 @@ import { request as __request } from "./core/request";
 import type {
   AppointmentsControllerCreateV1Data,
   AppointmentsControllerCreateV1Response,
-  AppointmentsControllerFindAllV1Data,
-  AppointmentsControllerFindAllV1Response,
+  AppointmentsControllerFindAllByCustomerV1Data,
+  AppointmentsControllerFindAllByCustomerV1Response,
+  AppointmentsControllerFindAllByStaffV1Data,
+  AppointmentsControllerFindAllByStaffV1Response,
   AppointmentsControllerCountByCustomerV1Data,
   AppointmentsControllerCountByCustomerV1Response,
   AppointmentsControllerCountV1Data,
@@ -18,16 +20,6 @@ import type {
   AppointmentsControllerUpdateV1Response,
   AppointmentsControllerRemoveV1Data,
   AppointmentsControllerRemoveV1Response,
-  AppointmentServicesControllerFindAllV1Data,
-  AppointmentServicesControllerFindAllV1Response,
-  AppointmentServicesControllerFindByIdV1Data,
-  AppointmentServicesControllerFindByIdV1Response,
-  AppointmentServicesControllerUpdateV1Data,
-  AppointmentServicesControllerUpdateV1Response,
-  AppointmentServicesControllerRemoveV1Data,
-  AppointmentServicesControllerRemoveV1Response,
-  AppointmentServicesControllerFindAppointmentByStaffV1Data,
-  AppointmentServicesControllerFindAppointmentByStaffV1Response,
   AuthControllerLoginV1Data,
   AuthControllerLoginV1Response,
   AuthControllerMeV1Response,
@@ -143,9 +135,9 @@ export class AppointmentsService {
    * @returns InfinityPaginationAppointmentResponseDto
    * @throws ApiError
    */
-  public static appointmentsControllerFindAllV1(
-    data: AppointmentsControllerFindAllV1Data
-  ): CancelablePromise<AppointmentsControllerFindAllV1Response> {
+  public static appointmentsControllerFindAllByCustomerV1(
+    data: AppointmentsControllerFindAllByCustomerV1Data
+  ): CancelablePromise<AppointmentsControllerFindAllByCustomerV1Response> {
     return __request(OpenAPI, {
       method: "GET",
       url: "/api/v1/appointments",
@@ -156,6 +148,28 @@ export class AppointmentsService {
         endTime: data.endTime,
         status: data.status,
         userId: data.userId,
+      },
+    });
+  }
+
+  /**
+   * @param data The data for the request.
+   * @param data.staffId
+   * @param data.page
+   * @param data.limit
+   * @returns InfinityPaginationAppointmentResponseDto
+   * @throws ApiError
+   */
+  public static appointmentsControllerFindAllByStaffV1(
+    data: AppointmentsControllerFindAllByStaffV1Data
+  ): CancelablePromise<AppointmentsControllerFindAllByStaffV1Response> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/appointments/staff",
+      query: {
+        staffId: data.staffId,
+        page: data.page,
+        limit: data.limit,
       },
     });
   }
@@ -253,103 +267,6 @@ export class AppointmentsService {
       url: "/api/v1/appointments/{id}",
       path: {
         id: data.id,
-      },
-    });
-  }
-}
-
-export class AppointmentservicesService {
-  /**
-   * @param data The data for the request.
-   * @param data.page
-   * @param data.limit
-   * @returns InfinityPaginationAppointmentServiceResponseDto
-   * @throws ApiError
-   */
-  public static appointmentServicesControllerFindAllV1(
-    data: AppointmentServicesControllerFindAllV1Data = {}
-  ): CancelablePromise<AppointmentServicesControllerFindAllV1Response> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/api/v1/appointment-services",
-      query: {
-        page: data.page,
-        limit: data.limit,
-      },
-    });
-  }
-
-  /**
-   * @param data The data for the request.
-   * @param data.id
-   * @returns AppointmentService
-   * @throws ApiError
-   */
-  public static appointmentServicesControllerFindByIdV1(
-    data: AppointmentServicesControllerFindByIdV1Data
-  ): CancelablePromise<AppointmentServicesControllerFindByIdV1Response> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/api/v1/appointment-services/{id}",
-      path: {
-        id: data.id,
-      },
-    });
-  }
-
-  /**
-   * @param data The data for the request.
-   * @param data.id
-   * @param data.requestBody
-   * @returns AppointmentService
-   * @throws ApiError
-   */
-  public static appointmentServicesControllerUpdateV1(
-    data: AppointmentServicesControllerUpdateV1Data
-  ): CancelablePromise<AppointmentServicesControllerUpdateV1Response> {
-    return __request(OpenAPI, {
-      method: "PATCH",
-      url: "/api/v1/appointment-services/{id}",
-      path: {
-        id: data.id,
-      },
-      body: data.requestBody,
-      mediaType: "application/json",
-    });
-  }
-
-  /**
-   * @param data The data for the request.
-   * @param data.id
-   * @returns unknown
-   * @throws ApiError
-   */
-  public static appointmentServicesControllerRemoveV1(
-    data: AppointmentServicesControllerRemoveV1Data
-  ): CancelablePromise<AppointmentServicesControllerRemoveV1Response> {
-    return __request(OpenAPI, {
-      method: "DELETE",
-      url: "/api/v1/appointment-services/{id}",
-      path: {
-        id: data.id,
-      },
-    });
-  }
-
-  /**
-   * @param data The data for the request.
-   * @param data.staffId
-   * @returns AppointmentService
-   * @throws ApiError
-   */
-  public static appointmentServicesControllerFindAppointmentByStaffV1(
-    data: AppointmentServicesControllerFindAppointmentByStaffV1Data
-  ): CancelablePromise<AppointmentServicesControllerFindAppointmentByStaffV1Response> {
-    return __request(OpenAPI, {
-      method: "GET",
-      url: "/api/v1/appointment-services/staff/{staffId}",
-      path: {
-        staffId: data.staffId,
       },
     });
   }
@@ -683,8 +600,9 @@ export class ReceptionsService {
 
   /**
    * @param data The data for the request.
-   * @param data.id
-   * @returns Reception
+   * @param data.id ID của reception cần check-in
+   * @param data.appointmentId ID của cuộc hẹn liên quan đến reception
+   * @returns Reception Check-in thành công
    * @throws ApiError
    */
   public static receptionsControllerCheckinV1(
@@ -692,9 +610,10 @@ export class ReceptionsService {
   ): CancelablePromise<ReceptionsControllerCheckinV1Response> {
     return __request(OpenAPI, {
       method: "PATCH",
-      url: "/api/v1/receptions/checkin/{id}",
+      url: "/api/v1/receptions/checkin/{id}/{appointmentId}",
       path: {
         id: data.id,
+        appointmentId: data.appointmentId,
       },
     });
   }

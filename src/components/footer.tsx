@@ -26,7 +26,7 @@ const CustomerOnly = [
 const StaffOnly = [
   {
     name: "Thống kê",
-    path: "/satistic",
+    path: "/statistic",
     icon: SatisticIcon,
   },
   {

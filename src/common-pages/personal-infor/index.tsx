@@ -17,9 +17,9 @@ interface EmptyHealthRecordProps {
 export default function EmptyHealthRecord({
   onAddRecord,
 }: EmptyHealthRecordProps) {
-  const auth = useAtomValue(authState);
+  const auth = useAtomValue(authState)?.auth;
   const [customerRecords, setCustomerRecords] = useAtom(customerRecordList);
-  const { data, error, isLoading, mutate } = useCustomerRecord({
+  const { data } = useCustomerRecord({
     userId: auth?.user.id as number,
   });
 

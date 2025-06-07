@@ -8,16 +8,36 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
+import { useCustomerRecord } from "@/client/services/customer-record";
+import { useAtomValue } from "jotai";
+import { authState } from "@/state";
+import { CustomerRecord } from "@/client/api";
+import { format, parseISO } from "date-fns";
 
-interface props {
+interface Props {
   onReadyChange?: (ready: boolean) => void;
+  selectedProfile: CustomerRecord | null;
+  onProfileChange: (profile: CustomerRecord | null) => void;
 }
 
-const ProfileInfo: FC<props> = ({ onReadyChange }) => {
+const ProfileInfo: FC<Props> = ({
+  onReadyChange,
+  selectedProfile,
+  onProfileChange,
+}) => {
+  const auth = useAtomValue(authState)?.auth;
+  const { data } = useCustomerRecord({ userId: auth?.user.id || 0 });
+
+  const handleSelectProfile = (profile: CustomerRecord) => {
+    onProfileChange(profile);
+  };
+
   useEffect(() => {
     onReadyChange?.(true);
   }, [onReadyChange]);
+
+  if (!data) return null;
   return (
     <>
       <h2 className="font-medium text-lg text-center pt-3">Thông tin hồ sơ</h2>
@@ -28,16 +48,21 @@ const ProfileInfo: FC<props> = ({ onReadyChange }) => {
               <FileText className="h-4 w-4 mr-2" />
               Chọn hồ sơ
             </label>
-            <Select>
+            <Select
+              onValueChange={(value) => {
+                const profile = data?.find((p) => p.id === value);
+                if (profile) handleSelectProfile(profile);
+              }}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Chọn hồ sơ của bạn" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="profile1">
-                  Nguyễn Văn A 21/04/1986
-                </SelectItem>
-                <SelectItem value="profile2">Trần Mạnh B 30/02/2000</SelectItem>
-                <SelectItem value="new">Tạo hồ sơ mới</SelectItem>
+                {data?.map((profile) => (
+                  <SelectItem key={profile.id} value={profile.id}>
+                    {profile.fullName}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -45,7 +70,11 @@ const ProfileInfo: FC<props> = ({ onReadyChange }) => {
             <User className="h-4 w-4 mr-2" />
             Họ và tên
           </label>
-          <Input disabled placeholder="Nhập họ và tên của bạn" />
+          <Input
+            disabled
+            placeholder="Nhập họ và tên của bạn"
+            defaultValue={selectedProfile?.fullName}
+          />
         </div>
 
         <div className="space-y-2">
@@ -53,14 +82,27 @@ const ProfileInfo: FC<props> = ({ onReadyChange }) => {
             <Phone className="h-4 w-4 mr-2" />
             Số điện thoại
           </label>
-          <Input disabled placeholder="Nhập số điện thoại" type="tel" />
+          <Input
+            disabled
+            placeholder="Nhập số điện thoại"
+            type="tel"
+            defaultValue={selectedProfile?.user.phoneNumber}
+          />
         </div>
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center">
             <Calendar className="h-4 w-4 mr-2" />
             Ngày sinh
           </label>
-          <Input disabled placeholder="DD/MM/YYYY" type="date" />
+          <Input
+            disabled
+            placeholder="DD/MM/YYYY"
+            defaultValue={
+              selectedProfile
+                ? format(parseISO(selectedProfile.DOB), "dd/MM/yyyy")
+                : ""
+            }
+          />
         </div>
 
         <div className="space-y-2">

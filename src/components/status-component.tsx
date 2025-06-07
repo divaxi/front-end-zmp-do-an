@@ -9,6 +9,7 @@ import clsx from "clsx";
 import {
   APPOINTMENT_STATUS_TEXT,
   APPOINTMENT_STATUS_COLOR,
+  APPOINTMENT_STATUS,
 } from "@/constants/appointment";
 import { Control, Controller, FieldValues } from "react-hook-form";
 
@@ -34,16 +35,19 @@ const StatusComponent = <T extends FieldValues = FieldValues>({
   const sharedClass =
     "min-w-[130px] h-8 px-2 py-1 rounded-lg text-xs text-white inline-flex items-center justify-center border-none";
 
-  return isStaff && status !== "ThemMoi" ? (
+  return isStaff && status !== APPOINTMENT_STATUS.scheduled ? (
     <Controller
       control={control}
       name={name as never}
       defaultValue={status as never}
       render={({ field }) => (
         <Select
-          value={field.value}
+          value={APPOINTMENT_STATUS_TEXT[field.value as unknown as Status]}
           onValueChange={(val) => {
-            onChange?.(val as Status, id);
+            const key = Object.keys(APPOINTMENT_STATUS_TEXT).find(
+              (key) => APPOINTMENT_STATUS_TEXT[key] === val
+            );
+            onChange?.(Number(key));
           }}
         >
           <SelectTrigger
@@ -56,10 +60,11 @@ const StatusComponent = <T extends FieldValues = FieldValues>({
             {Object.entries(APPOINTMENT_STATUS_TEXT).map(([key, label]) => (
               <SelectItem
                 key={key}
-                value={key}
+                value={APPOINTMENT_STATUS_TEXT[key as unknown as Status]}
                 className="text-xs text-white hover:opacity-90 cursor-pointer mb-2"
                 style={{
-                  backgroundColor: APPOINTMENT_STATUS_COLOR[key as Status],
+                  backgroundColor:
+                    APPOINTMENT_STATUS_COLOR[key as unknown as Status],
                 }}
               >
                 {label}

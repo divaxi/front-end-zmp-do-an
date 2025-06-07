@@ -17,7 +17,6 @@ export default function ScheduleList({ schedules }: ScheduleListProps) {
   const setschedules = useSetAtom(scheduleList);
   const { openSnackbar } = useSnackbar();
   // const isLoading = useAtom(loadingState);
-  console.log(new Date());
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
@@ -25,7 +24,6 @@ export default function ScheduleList({ schedules }: ScheduleListProps) {
         <h2 className="text-subtitle italic text-sm">
           Hôm nay: {format(new Date(), "dd-MM-yyyy")}
         </h2>
-        {/* {isLoading && <LoadingSpinner />} */}
         {schedules.length === 0 && <NoData />}
         {schedules.length > 0 &&
           schedules?.map((schedule) => (

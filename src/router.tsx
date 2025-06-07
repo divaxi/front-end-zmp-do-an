@@ -25,6 +25,7 @@ import ScheduleUpdatePage from "./pages/schedule/update-form";
 import SchedulePage from "./pages/schedule";
 import CustomerRecordUpdatePage from "./pages/customer-record/update-form";
 import ChatbotPage from "./pages/chatbot";
+import StatisticPage from "./pages/satistic";
 
 export const router = createBrowserRouter(
   [
@@ -90,14 +91,14 @@ export const router = createBrowserRouter(
           },
         },
         {
-          path: "/booking/time-slot",
+          path: "/booking/time-slot/:serviceId",
           element: <BookTimeSlotPage />,
           handle: {
             title: "Chọn thời gian",
           },
         },
         {
-          path: "/booking/book-confirm",
+          path: "/booking/book-confirm/:serviceId/:scheduleId",
           element: <BookConfirmPage />,
           handle: {
             title: "Xác nhận thông tin",
@@ -199,6 +200,17 @@ export const router = createBrowserRouter(
           ),
           handle: {
             title: "Chatbot",
+          },
+        },
+        {
+          path: "/statistic",
+          element: (
+            <ProtectedRoute>
+              <StatisticPage />
+            </ProtectedRoute>
+          ),
+          handle: {
+            title: "Thống kê",
           },
         },
       ],
