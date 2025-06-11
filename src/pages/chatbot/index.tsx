@@ -1,6 +1,6 @@
 import { chatbotMessageList } from "@/state";
 import { useAtom } from "jotai";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MessageSection } from "@/components/chatbot/message-section";
 import { InputMessage } from "@/components/chatbot/input-message";
 import { postChatbotAsk } from "@/client/services/chatbot";
@@ -10,6 +10,10 @@ const ChatbotPage: React.FC = () => {
   const [messages, setMessages] = useAtom(chatbotMessageList);
   const { openSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [firstMount, setFirstMount] = useState(true);
+  useEffect(() => {
+    setFirstMount(false);
+  });
   return (
     <div className="relative bg-white">
       <MessageSection messages={messages} loading={loading} />
@@ -18,7 +22,7 @@ const ChatbotPage: React.FC = () => {
         onSend={(msg) => {
           setMessages((prev) => [...prev, msg]);
           setLoading(true);
-          postChatbotAsk({ content: [...messages, msg], initiate: false })
+          postChatbotAsk({ content: [...messages, msg], initiate: firstMount })
             .then((data) => {
               setMessages((prev) => [
                 ...prev,
