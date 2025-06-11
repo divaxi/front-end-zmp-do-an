@@ -6,7 +6,7 @@ export const loginWithZalo = async () => {
   const tokenPhone = await getPhoneNumber({});
   const authenticateUser = await AuthService.authControllerLoginV1({
     requestBody: {
-      zaloAccessToken: tokenPhone.number || "0000000001",
+      zaloAccessToken: tokenPhone.number || "0000000002",
     },
   });
   OpenAPI.TOKEN = authenticateUser.token;

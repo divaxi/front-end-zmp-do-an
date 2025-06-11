@@ -5,7 +5,6 @@ import {
   Cart,
   Category,
   Color,
-  Message,
   NewsDetail,
   Payment,
   Product,
@@ -26,6 +25,7 @@ import {
   CustomerRecordsControllerFindByUserV1Response,
   StaffsControllerFindByIdV1Response,
   SchedulesControllerFindAllV1Response,
+  MessageContentDto,
 } from "./client/api";
 
 export const authState = atomWithStorage<
@@ -57,12 +57,11 @@ export const scheduleList = atom<SchedulesControllerFindAllV1Response["data"]>(
 export const customerRecordList =
   atom<CustomerRecordsControllerFindByUserV1Response>([]);
 
-export const chatbotMessageList = atom<Message[]>([
+export const chatbotMessageList = atom<MessageContentDto[]>([
   {
-    id: "1",
     content:
       "Xin chào anh/chị! Em là trợ lý ảo của Phòng Khám Nha Khoa 🦷\nAnh/chị muốn đặt lịch hẹn, xem dịch vụ, hoặc cần tư vấn gì ạ?",
-    sender: "bot",
+    role: "assistant",
   },
 ]);
 

@@ -1,14 +1,17 @@
 import { useAtomValue } from "jotai";
-import { serviceList } from "@/state";
+import { authState, serviceList } from "@/state";
 import { Button } from "../ui/button";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ServiceDetail() {
   const { id } = useParams();
 
+  const navigate = useNavigate();
+
   const serviceDetail = useAtomValue(serviceList).find(
     (service) => service.id === id
   );
+  const staff = useAtomValue(authState)?.staff;
 
   return (
     <div className="h-full flex flex-col">
@@ -36,9 +39,20 @@ export default function ServiceDetail() {
           </div>
         </div>
 
-        <Button className="text-white font-bold text-base mt-8">
-          Đặt lịch ngay
-        </Button>
+        {!staff && (
+          <Button
+            onClick={() =>
+              navigate(`/booking/time-slot/${serviceDetail?.id}`, {
+                state: {
+                  serviceName: serviceDetail?.serviceName,
+                },
+              })
+            }
+            className="text-white font-bold text-base mt-8"
+          >
+            Đặt lịch ngay
+          </Button>
+        )}
       </div>
     </div>
   );

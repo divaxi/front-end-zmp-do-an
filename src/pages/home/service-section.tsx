@@ -24,7 +24,7 @@ export default function ServiceSection() {
           <div
             key={service.id}
             className="flex flex-col min-w-[150px] border border-[var(--normalBorder)] rounded-md shadow-sm p-2"
-            // onClick={() => navigate(`/service-detail/${service.id}`)}
+            onClick={() => navigate(`/service-detail/${service.id}`)}
           >
             <img
               src={service.image?.path}

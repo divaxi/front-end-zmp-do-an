@@ -164,10 +164,18 @@ export type LoginResponseDto = {
   user: User;
 };
 
+export type MessageContentDto = {
+  role: string;
+  content: string;
+};
+
 export type MessageDto = {
-  content: Array<string>;
   /**
-   * new to get chat context
+   * Danh sách nội dung tin nhắn của user
+   */
+  content: Array<MessageContentDto>;
+  /**
+   * Dùng để xác định có lấy lịch sử tin nhắn không
    */
   initiate: boolean;
 };

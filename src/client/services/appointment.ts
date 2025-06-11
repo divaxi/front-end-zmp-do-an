@@ -1,4 +1,4 @@
-import { AppointmentsService, CustomerrecordsService } from "../api/sdk.gen";
+import { AppointmentsService } from "../api/sdk.gen";
 import useSWR from "swr";
 import {
   AppointmentsControllerFindAllByCustomerV1Data,

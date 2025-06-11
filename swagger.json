@@ -1668,6 +1668,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
         "tags": ["Chatbot"]
       }
     },
@@ -2710,22 +2715,39 @@
         },
         "required": ["status"]
       },
+      "MessageContentDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "example": "user"
+          },
+          "content": {
+            "type": "string",
+            "example": "hahahahhah"
+          }
+        },
+        "required": ["role", "content"]
+      },
       "MessageDto": {
         "type": "object",
         "properties": {
           "content": {
-            "example": {
-              "role": "user",
-              "content": "hahahahhah"
-            },
+            "description": "Danh sách nội dung tin nhắn của user",
+            "example": [
+              {
+                "role": "user",
+                "content": "hahahahhah"
+              }
+            ],
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/MessageContentDto"
             }
           },
           "initiate": {
             "type": "boolean",
-            "description": "new to get chat context",
+            "description": "Dùng để xác định có lấy lịch sử tin nhắn không",
             "example": true
           }
         },

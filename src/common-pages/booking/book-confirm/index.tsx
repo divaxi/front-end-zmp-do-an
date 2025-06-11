@@ -42,7 +42,7 @@ export default function BookConfirmPage() {
           schedule: { id: selectedSchedule.id },
           specificTime: selectedSchedule.startTime,
         }}
-        navigate={()=>{
+        navigate={() => {
           navigate("/");
         }}
       />

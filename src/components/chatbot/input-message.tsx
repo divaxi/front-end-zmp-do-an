@@ -1,34 +1,24 @@
 import React, { useState, useRef } from "react";
-import type { Message } from "@/types";
 import { SendHorizonalIcon } from "lucide-react";
+import { MessageContentDto } from "@/client/api";
 
 interface InputMessageProps {
-  onSend: (msg: Message) => void;
+  onSend: (msg: MessageContentDto) => void;
+  loading: boolean;
 }
 
-export function InputMessage({ onSend }: InputMessageProps) {
+export function InputMessage({ onSend, loading }: InputMessageProps) {
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSend() {
     if (!input.trim()) return;
-    const userMsg: Message = {
-      id: Date.now().toString(),
+    const userMsg: MessageContentDto = {
       content: input,
-      sender: "user",
+      role: "user",
     };
     onSend(userMsg);
     setInput("");
-    setTimeout(() => {
-      const botMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        content:
-          "Cảm ơn anh/chị đã nhắn tin! Em sẽ hỗ trợ anh/chị trong thời gian sớm nhất.",
-        sender: "bot",
-      };
-      onSend(botMsg);
-    }, 500);
-    inputRef.current?.focus();
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -47,6 +37,7 @@ export function InputMessage({ onSend }: InputMessageProps) {
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         aria-label="Nhập tin nhắn"
+        disabled={loading}
       />
       <button
         className="bg-primary text-white rounded-full px-4 py-2 font-medium hover:bg-iconBorder transition"
