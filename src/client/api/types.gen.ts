@@ -27,6 +27,8 @@ export type AppointmentSatisticDto = {
 export type AuthZaloLoginDto = {
   zaloAccessToken: string;
   phoneNumber: string;
+  avatar: string;
+  name: string;
 };
 
 export type ChatbotResponseDto = {

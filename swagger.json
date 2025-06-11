@@ -32,7 +32,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Users"]
+        "tags": [
+          "Users"
+        ]
       },
       "get": {
         "operationId": "UsersController_findAll_v1",
@@ -87,7 +89,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Users"]
+        "tags": [
+          "Users"
+        ]
       }
     },
     "/api/v1/users/{id}": {
@@ -120,7 +124,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Users"]
+        "tags": [
+          "Users"
+        ]
       },
       "patch": {
         "operationId": "UsersController_update_v1",
@@ -161,7 +167,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Users"]
+        "tags": [
+          "Users"
+        ]
       },
       "delete": {
         "operationId": "UsersController_remove_v1",
@@ -185,7 +193,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Users"]
+        "tags": [
+          "Users"
+        ]
       }
     },
     "/api/v1/assign": {
@@ -219,7 +229,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Files"]
+        "tags": [
+          "Files"
+        ]
       }
     },
     "/api/v1/files/upload": {
@@ -259,7 +271,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Files"]
+        "tags": [
+          "Files"
+        ]
       }
     },
     "/api/v1/customer-records": {
@@ -293,7 +307,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Customerrecords"]
+        "tags": [
+          "Customerrecords"
+        ]
       },
       "get": {
         "operationId": "CustomerRecordsController_findAll_v1",
@@ -332,7 +348,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Customerrecords"]
+        "tags": [
+          "Customerrecords"
+        ]
       }
     },
     "/api/v1/customer-records/user/{userId}": {
@@ -368,7 +386,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Customerrecords"]
+        "tags": [
+          "Customerrecords"
+        ]
       }
     },
     "/api/v1/customer-records/{id}": {
@@ -401,7 +421,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Customerrecords"]
+        "tags": [
+          "Customerrecords"
+        ]
       },
       "patch": {
         "operationId": "CustomerRecordsController_update_v1",
@@ -442,7 +464,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Customerrecords"]
+        "tags": [
+          "Customerrecords"
+        ]
       },
       "delete": {
         "operationId": "CustomerRecordsController_remove_v1",
@@ -466,7 +490,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Customerrecords"]
+        "tags": [
+          "Customerrecords"
+        ]
       }
     },
     "/api/v1/services": {
@@ -500,7 +526,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Services"]
+        "tags": [
+          "Services"
+        ]
       },
       "get": {
         "operationId": "ServicesController_findAll_v1",
@@ -539,7 +567,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Services"]
+        "tags": [
+          "Services"
+        ]
       }
     },
     "/api/v1/services/{id}": {
@@ -572,7 +602,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Services"]
+        "tags": [
+          "Services"
+        ]
       },
       "patch": {
         "operationId": "ServicesController_update_v1",
@@ -613,7 +645,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Services"]
+        "tags": [
+          "Services"
+        ]
       },
       "delete": {
         "operationId": "ServicesController_remove_v1",
@@ -637,7 +671,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Services"]
+        "tags": [
+          "Services"
+        ]
       }
     },
     "/api/v1/schedules": {
@@ -671,7 +707,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       },
       "get": {
         "operationId": "SchedulesController_findAll_v1",
@@ -718,7 +756,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       }
     },
     "/api/v1/schedules/by-day": {
@@ -755,7 +795,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       }
     },
     "/api/v1/schedules/{id}": {
@@ -788,7 +830,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       },
       "patch": {
         "operationId": "SchedulesController_update_v1",
@@ -829,7 +873,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       },
       "delete": {
         "operationId": "SchedulesController_remove_v1",
@@ -853,7 +899,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       }
     },
     "/api/v1/schedules/staff/{staffId}": {
@@ -889,7 +937,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Schedules"]
+        "tags": [
+          "Schedules"
+        ]
       }
     },
     "/api/v1/staffs": {
@@ -923,7 +973,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Staffs"]
+        "tags": [
+          "Staffs"
+        ]
       },
       "get": {
         "operationId": "StaffsController_findAll_v1",
@@ -962,7 +1014,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Staffs"]
+        "tags": [
+          "Staffs"
+        ]
       }
     },
     "/api/v1/staffs/user/{id}": {
@@ -995,7 +1049,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Staffs"]
+        "tags": [
+          "Staffs"
+        ]
       }
     },
     "/api/v1/staffs/{id}": {
@@ -1028,7 +1084,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Staffs"]
+        "tags": [
+          "Staffs"
+        ]
       },
       "patch": {
         "operationId": "StaffsController_update_v1",
@@ -1069,7 +1127,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Staffs"]
+        "tags": [
+          "Staffs"
+        ]
       },
       "delete": {
         "operationId": "StaffsController_remove_v1",
@@ -1093,7 +1153,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Staffs"]
+        "tags": [
+          "Staffs"
+        ]
       }
     },
     "/api/v1/receptions": {
@@ -1127,7 +1189,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Receptions"]
+        "tags": [
+          "Receptions"
+        ]
       },
       "get": {
         "operationId": "ReceptionsController_findAll_v1",
@@ -1166,7 +1230,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Receptions"]
+        "tags": [
+          "Receptions"
+        ]
       }
     },
     "/api/v1/receptions/{id}": {
@@ -1199,7 +1265,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Receptions"]
+        "tags": [
+          "Receptions"
+        ]
       },
       "delete": {
         "operationId": "ReceptionsController_remove_v1",
@@ -1223,7 +1291,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Receptions"]
+        "tags": [
+          "Receptions"
+        ]
       }
     },
     "/api/v1/receptions/appointment/{appointmentId}": {
@@ -1256,7 +1326,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Receptions"]
+        "tags": [
+          "Receptions"
+        ]
       }
     },
     "/api/v1/receptions/checkin/{id}/{appointmentId}": {
@@ -1299,7 +1371,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Receptions"]
+        "tags": [
+          "Receptions"
+        ]
       }
     },
     "/api/v1/appointments": {
@@ -1333,7 +1407,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       },
       "get": {
         "operationId": "AppointmentsController_findAllByCustomer_v1",
@@ -1406,7 +1482,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       }
     },
     "/api/v1/appointments/staff": {
@@ -1455,7 +1533,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       }
     },
     "/api/v1/appointments/countCustomer": {
@@ -1498,7 +1578,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       }
     },
     "/api/v1/appointments/count": {
@@ -1541,7 +1623,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       }
     },
     "/api/v1/appointments/{id}": {
@@ -1574,7 +1658,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       },
       "patch": {
         "operationId": "AppointmentsController_update_v1",
@@ -1615,7 +1701,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       },
       "delete": {
         "operationId": "AppointmentsController_remove_v1",
@@ -1639,7 +1727,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Appointments"]
+        "tags": [
+          "Appointments"
+        ]
       }
     },
     "/api/v1/bot/chat": {
@@ -1673,7 +1763,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Chatbot"]
+        "tags": [
+          "Chatbot"
+        ]
       }
     },
     "/api/v1/satistic/count-order": {
@@ -1724,7 +1816,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Satistic"]
+        "tags": [
+          "Satistic"
+        ]
       }
     },
     "/api/v1/auth/zalo/login": {
@@ -1753,7 +1847,9 @@
             }
           }
         },
-        "tags": ["Auth"]
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/api/v1/auth/me": {
@@ -1777,7 +1873,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Auth"]
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/api/v1/auth/refresh": {
@@ -1801,7 +1899,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Auth"]
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/api/v1/auth/logout": {
@@ -1818,7 +1918,9 @@
             "bearer": []
           }
         ],
-        "tags": ["Auth"]
+        "tags": [
+          "Auth"
+        ]
       }
     },
     "/": {
@@ -1830,7 +1932,9 @@
             "description": ""
           }
         },
-        "tags": ["Home"]
+        "tags": [
+          "Home"
+        ]
       }
     }
   },
@@ -1858,7 +1962,9 @@
             "type": "string"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "RoleDto": {
         "type": "object",
@@ -1868,7 +1974,9 @@
             "example": 1
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "CreateUserDto": {
         "type": "object",
@@ -1888,7 +1996,10 @@
             "$ref": "#/components/schemas/RoleDto"
           }
         },
-        "required": ["phoneNumber", "userName"]
+        "required": [
+          "phoneNumber",
+          "userName"
+        ]
       },
       "FileType": {
         "type": "object",
@@ -1902,7 +2013,10 @@
             "example": "https://example.com/path/to/file.jpg"
           }
         },
-        "required": ["id", "path"]
+        "required": [
+          "id",
+          "path"
+        ]
       },
       "Role": {
         "type": "object",
@@ -1915,7 +2029,10 @@
             "example": "admin"
           }
         },
-        "required": ["id", "name"]
+        "required": [
+          "id",
+          "name"
+        ]
       },
       "User": {
         "type": "object",
@@ -1985,7 +2102,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "UpdateUserDto": {
         "type": "object",
@@ -2014,7 +2134,9 @@
             "example": "https://example.com/path/to/file.jpg"
           }
         },
-        "required": ["path"]
+        "required": [
+          "path"
+        ]
       },
       "FileResponseDto": {
         "type": "object",
@@ -2023,7 +2145,9 @@
             "$ref": "#/components/schemas/FileType"
           }
         },
-        "required": ["file"]
+        "required": [
+          "file"
+        ]
       },
       "CreateCustomerRecordDto": {
         "type": "object",
@@ -2045,7 +2169,11 @@
             "type": "string"
           }
         },
-        "required": ["DOB", "sex", "fullName"]
+        "required": [
+          "DOB",
+          "sex",
+          "fullName"
+        ]
       },
       "CustomerRecord": {
         "type": "object",
@@ -2122,7 +2250,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "UpdateCustomerRecordDto": {
         "type": "object",
@@ -2165,7 +2296,9 @@
             "type": "string"
           }
         },
-        "required": ["serviceName"]
+        "required": [
+          "serviceName"
+        ]
       },
       "Service": {
         "type": "object",
@@ -2226,7 +2359,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "UpdateServiceDto": {
         "type": "object",
@@ -2252,7 +2388,9 @@
             "type": "string"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "CreateScheduleDto": {
         "type": "object",
@@ -2272,7 +2410,11 @@
             "$ref": "#/components/schemas/StaffDto"
           }
         },
-        "required": ["endTime", "startTime", "staff"]
+        "required": [
+          "endTime",
+          "startTime",
+          "staff"
+        ]
       },
       "Staff": {
         "type": "object",
@@ -2380,7 +2522,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "UpdateScheduleDto": {
         "type": "object",
@@ -2426,7 +2571,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "UpdateStaffDto": {
         "type": "object",
@@ -2446,7 +2594,9 @@
             "type": "string"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "CreateReceptionDto": {
         "type": "object",
@@ -2462,11 +2612,16 @@
             "$ref": "#/components/schemas/AppointmentDto"
           }
         },
-        "required": ["Appointment"]
+        "required": [
+          "Appointment"
+        ]
       },
       "StatusEnum": {
         "type": "number",
-        "enum": [1, 2],
+        "enum": [
+          1,
+          2
+        ],
         "description": "Status of the appointment (1 = notCheckin, 2 = checkin)"
       },
       "Appointment": {
@@ -2608,7 +2763,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "ServiceDto": {
         "type": "object",
@@ -2617,7 +2775,9 @@
             "type": "string"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "ScheduleDto": {
         "type": "object",
@@ -2626,7 +2786,9 @@
             "type": "string"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "CustomerRecordDto": {
         "type": "object",
@@ -2635,7 +2797,9 @@
             "type": "string"
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "CreateAppointmentDto": {
         "type": "object",
@@ -2657,7 +2821,12 @@
             "$ref": "#/components/schemas/CustomerRecordDto"
           }
         },
-        "required": ["service", "schedule", "specificTime", "customerRecord"]
+        "required": [
+          "service",
+          "schedule",
+          "specificTime",
+          "customerRecord"
+        ]
       },
       "InfinityPaginationAppointmentResponseDto": {
         "type": "object",
@@ -2673,7 +2842,10 @@
             "example": true
           }
         },
-        "required": ["data", "hasNextPage"]
+        "required": [
+          "data",
+          "hasNextPage"
+        ]
       },
       "AppointmentSatisticDto": {
         "type": "object",
@@ -2682,7 +2854,9 @@
             "type": "number"
           }
         },
-        "required": ["count"]
+        "required": [
+          "count"
+        ]
       },
       "UpdateAppointmentDto": {
         "type": "object",
@@ -2713,7 +2887,9 @@
             ]
           }
         },
-        "required": ["status"]
+        "required": [
+          "status"
+        ]
       },
       "MessageContentDto": {
         "type": "object",
@@ -2727,7 +2903,10 @@
             "example": "hahahahhah"
           }
         },
-        "required": ["role", "content"]
+        "required": [
+          "role",
+          "content"
+        ]
       },
       "MessageDto": {
         "type": "object",
@@ -2751,7 +2930,10 @@
             "example": true
           }
         },
-        "required": ["content", "initiate"]
+        "required": [
+          "content",
+          "initiate"
+        ]
       },
       "ChatbotResponseDto": {
         "type": "object",
@@ -2761,7 +2943,9 @@
             "example": "This is message response from chatbot"
           }
         },
-        "required": ["content"]
+        "required": [
+          "content"
+        ]
       },
       "EnumerateResponseDto": {
         "type": "object",
@@ -2773,7 +2957,9 @@
             }
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "AuthZaloLoginDto": {
         "type": "object",
@@ -2785,9 +2971,22 @@
           "phoneNumber": {
             "type": "string",
             "example": "0000000001"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://path/to/avatar"
+          },
+          "name": {
+            "type": "string",
+            "example": "Gustav"
           }
         },
-        "required": ["zaloAccessToken", "phoneNumber"]
+        "required": [
+          "zaloAccessToken",
+          "phoneNumber",
+          "avatar",
+          "name"
+        ]
       },
       "LoginResponseDto": {
         "type": "object",
@@ -2805,7 +3004,12 @@
             "$ref": "#/components/schemas/User"
           }
         },
-        "required": ["token", "refreshToken", "tokenExpires", "user"]
+        "required": [
+          "token",
+          "refreshToken",
+          "tokenExpires",
+          "user"
+        ]
       },
       "RefreshResponseDto": {
         "type": "object",
@@ -2820,7 +3024,11 @@
             "type": "number"
           }
         },
-        "required": ["token", "refreshToken", "tokenExpires"]
+        "required": [
+          "token",
+          "refreshToken",
+          "tokenExpires"
+        ]
       }
     }
   }
