@@ -1,12 +1,14 @@
-import { getPhoneNumber } from "zmp-sdk/apis";
+import { getPhoneNumber, getAccessToken } from "zmp-sdk/apis";
 import { AuthService, OpenAPI, StaffsService } from "../api";
 import { RoleEnum } from "@/utils/enum";
 
 export const loginWithZalo = async () => {
   const tokenPhone = await getPhoneNumber({});
+  const accessToken = await getAccessToken();
   const authenticateUser = await AuthService.authControllerLoginV1({
     requestBody: {
-      zaloAccessToken: tokenPhone.number || "0000000002",
+      zaloAccessToken: accessToken || "0000000002",
+      phoneNumber: tokenPhone?.number || "0000000002",
     },
   });
   OpenAPI.TOKEN = authenticateUser.token;
