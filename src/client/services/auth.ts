@@ -8,7 +8,7 @@ export const loginWithZalo = async () => {
   const {userInfo}= await getUserInfo({autoRequestPermission:true})
   const authenticateUser = await AuthService.authControllerLoginV1({
     requestBody: {
-      zaloAccessToken: accessToken || "0000000002",
+      zaloAccessToken: accessToken || "0000000001",
       phoneNumber: tokenPhone?.number || "0000000002",
       avatar:userInfo.avatar,
       name:userInfo.name

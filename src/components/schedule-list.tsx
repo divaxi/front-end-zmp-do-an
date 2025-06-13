@@ -20,7 +20,7 @@ export default function ScheduleList({ schedules }: ScheduleListProps) {
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className="flex flex-col p-4 gap-y-8 pb-[120px]">
+    <div className="flex flex-col p-4 gap-y-8 pb-[60px]">
         <h2 className="text-subtitle italic text-sm">
           Hôm nay: {format(new Date(), "dd-MM-yyyy")}
         </h2>
