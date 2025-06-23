@@ -6,7 +6,6 @@ export const APPOINTMENT_STATUS = {
   inProgress: 5, // Đang được khám
   completed: 6, // Đã hoàn tất
   noShow: 7, // Không đến
-  followUpNeeded: 8, // Cần tái khám
 };
 
 export const APPOINTMENT_STATUS_TEXT = {
@@ -17,7 +16,6 @@ export const APPOINTMENT_STATUS_TEXT = {
   [APPOINTMENT_STATUS.inProgress]: "Đang được khám",
   [APPOINTMENT_STATUS.completed]: "Đã hoàn tất",
   [APPOINTMENT_STATUS.noShow]: "Không đến",
-  [APPOINTMENT_STATUS.followUpNeeded]: "Cần tái khám",
 };
 
 export const APPOINTMENT_STATUS_COLOR = {
@@ -28,5 +26,4 @@ export const APPOINTMENT_STATUS_COLOR = {
   [APPOINTMENT_STATUS.inProgress]: "#dfb55c",
   [APPOINTMENT_STATUS.completed]: "#22c55e",
   [APPOINTMENT_STATUS.noShow]: "#cc454e",
-  [APPOINTMENT_STATUS.followUpNeeded]: "#5400ff",
 };
