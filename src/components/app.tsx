@@ -14,6 +14,8 @@ import { OpenAPI } from "@/client/api";
 import { router } from "@/router";
 import { LoadingSpinner } from "./loading-spinner";
 import requestwithtokens from "@/client/services/interceptors";
+import { SWRConfig } from "swr";
+import { optionsSWR } from "@/utils/swrConfig";
 
 const MyApp = () => {
   const [auth, setAuth] = useAtom(authState);
@@ -27,16 +29,18 @@ const MyApp = () => {
   localStorage.setItem(templateStorage, app.template);
   return (
     <App>
-      <SnackbarProvider>
-        <ModalLoaderProvider>
-          <TemplateProvider>
-            <ThemeProvider>
-              <LoadingSpinner />
-              <RouterProvider router={router} />
-            </ThemeProvider>
-          </TemplateProvider>
-        </ModalLoaderProvider>
-      </SnackbarProvider>
+      <SWRConfig value={optionsSWR}>
+        <SnackbarProvider>
+          <ModalLoaderProvider>
+            <TemplateProvider>
+              <ThemeProvider>
+                <LoadingSpinner />
+                <RouterProvider router={router} />
+              </ThemeProvider>
+            </TemplateProvider>
+          </ModalLoaderProvider>
+        </SnackbarProvider>
+      </SWRConfig>
     </App>
   );
 };

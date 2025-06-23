@@ -120,9 +120,10 @@ export default function AppointmentList({
     showModal(
       <AppointmentDeleteConfirmModal
         dateTime={appointment.specificTime}
-        execute={() => {
+        id={appointment.id}
+        onDelete={() => {
           setAppointments(
-            appointments?.filter((d) => d.id !== appointment.id) ?? []
+            appointments?.filter((appt) => appt.id !== appointment.id) || []
           );
         }}
       />

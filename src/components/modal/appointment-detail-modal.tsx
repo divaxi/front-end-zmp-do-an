@@ -31,6 +31,7 @@ const AppointmentDetailModal: FunctionComponent<
 Khách hàng: ${appointment.customerRecord.fullName} (${appointment.customerRecord.sex})
 Ngày sinh: ${format(appointment.customerRecord.DOB, "dd-MM-yyyy")}
 Giờ hẹn: ${format(appointment.specificTime, "HH:mm")}
+SĐT: ${appointment.customerRecord.user.phoneNumber}
 Trạng thái: ${APPOINTMENT_STATUS_TEXT[appointment.status]}
 ${appointment.note ? `Ghi chú: ${appointment.note}` : ""}
       `}

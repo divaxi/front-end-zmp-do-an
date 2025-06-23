@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useMatches } from "react-router-dom";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Suspense, useEffect, useState, useRef } from "react";
@@ -11,7 +11,13 @@ export default function Layout() {
   const [isScrolled, setScrolled] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const matches = useMatches();
   const isHomePage = location.pathname === "/";
+
+  const shouldHideFooter = matches.some((match) => {
+    const handle = match.handle as { hideFooter?: boolean } | undefined;
+    return handle?.hideFooter === true;
+  });
 
   useEffect(() => {
     const node = contentRef.current;
@@ -48,7 +54,7 @@ export default function Layout() {
           <Outlet />
         </Suspense>
       </div>
-      <Footer />
+      {!shouldHideFooter && <Footer />}
       <Toaster
         containerClassName="toast-container"
         containerStyle={{

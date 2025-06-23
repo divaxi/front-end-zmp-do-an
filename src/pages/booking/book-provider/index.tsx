@@ -1,34 +1,31 @@
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Page, Icon } from "zmp-ui";
-import ProviderCard from "@/components/booking/provider-card"; // Import component ProviderCard
 // import { useBookingProvider } from "@/client/services/booking";
 export default function BookProviderPage() {
-  const { serviceId } = useParams<{ serviceId: string }>(); // Lấy serviceId từ URL
+  // const { serviceId } = useParams<{ serviceId: string }>();
   const location = useLocation();
   const serviceName = location.state.serviceName;
   const navigate = useNavigate();
-  // const { data: providers } = useBookingProvider(serviceId || "");
 
-  // Hàm xử lý khi chọn một nhà cung cấp (provider)
-  const handleProviderSelect = (
-    providerId?: string | number,
-    providerName?: string
-  ) => {
-    console.log(
-      `Selected Service ID: ${serviceId}, Provider ID: ${providerId}`
-    );
-    // Điều hướng đến trang tiếp theo, ví dụ: chọn thời gian
-    // Đảm bảo bạn đã định nghĩa route này trong router.tsx
-    navigate(
-      `/booking/time-slot?serviceId=${serviceId}&providerId=${providerId}`,
-      {
-        state: {
-          serviceName: serviceName,
-          providerName: providerName,
-        },
-      }
-    );
-  };
+  // const handleProviderSelect = (
+  //   providerId?: string | number,
+  //   providerName?: string
+  // ) => {
+  //   console.log(
+  //     `Selected Service ID: ${serviceId}, Provider ID: ${providerId}`
+  //   );
+  //   // Điều hướng đến trang tiếp theo, ví dụ: chọn thời gian
+  //   // Đảm bảo bạn đã định nghĩa route này trong router.tsx
+  //   navigate(
+  //     `/booking/time-slot?serviceId=${serviceId}&providerId=${providerId}`,
+  //     {
+  //       state: {
+  //         serviceName: serviceName,
+  //         providerName: providerName,
+  //       },
+  //     }
+  //   );
+  // };
 
   // Hàm xử lý khi nhấn nút chỉnh sửa dịch vụ
   const handleEditService = () => {

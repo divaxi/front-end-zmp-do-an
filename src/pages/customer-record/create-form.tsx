@@ -23,8 +23,6 @@ const CustomerRecordCreatePage: React.FC = () => {
           execute={async () => {
             try {
               setLoading(true);
-              // ⏳ Mô phỏng độ trễ 1.2 giây
-              await new Promise((resolve) => setTimeout(resolve, 1200));
 
               const response = await fetch("/api/customer-record", {
                 method: "POST",
@@ -37,9 +35,6 @@ const CustomerRecordCreatePage: React.FC = () => {
               if (!response.ok) {
                 throw new Error("Failed to create customer record");
               }
-
-              const result = await response.json();
-              console.log("API response:", result);
 
               openSnackbar({
                 type: "success",

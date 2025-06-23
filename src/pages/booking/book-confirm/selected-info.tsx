@@ -1,13 +1,14 @@
-import { MapPin, Clock, HandHelping, CalendarClock } from "lucide-react";
+/* eslint-disable react/prop-types */
+import { Clock, HandHelping, CalendarClock } from "lucide-react";
 import { format } from "date-fns";
 import { Schedule, Service } from "@/client/api";
 
-interface Props {
-  selectedService: Service | undefined;
-  selectedSchedule: Schedule | undefined;
+interface props {
+  selectedService: Service;
+  selectedSchedule: Schedule;
 }
 
-const SelectedInfo: React.FC<Props> = ({
+const SelectedInfo: React.FC<props> = ({
   selectedService,
   selectedSchedule,
 }) => {

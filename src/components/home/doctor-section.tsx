@@ -1,10 +1,26 @@
 import { useHomeDoctors } from "@/client/services/doctor";
 import Section from "../section";
+import { Skeleton } from "../ui/skeleton";
 
 export default function DoctorSection() {
-  const { data: doctors } = useHomeDoctors({ limit: 999, page: 1 });
+  const { data: doctors, isLoading } = useHomeDoctors({ limit: 999, page: 1 });
   return (
     <Section title="Bác sĩ">
+      {isLoading && (
+        <div className="pt-2.5 pb-4 flex space-x-4 overflow-x-auto px-4 scrollbar-hide">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col min-w-[150px] border border-[var(--normalBorder)] rounded-md shadow-sm p-2"
+            >
+              <div className="w-full h-[100px] object-cover rounded-md bg-skeleton" />
+              <p className="text-sm text-subtitle mt-2 line-clamp-2">
+                <Skeleton className="w-full h-[20px] rounded-md" />
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="pt-2.5 pb-4 flex space-x-4 overflow-x-auto px-4 scrollbar-hide">
         {doctors?.data?.map((doctor) => (
           <div

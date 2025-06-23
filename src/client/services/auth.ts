@@ -3,15 +3,16 @@ import { AuthService, OpenAPI, StaffsService } from "../api";
 import { RoleEnum } from "@/utils/enum";
 
 export const loginWithZalo = async () => {
-  const tokenPhone = await getPhoneNumber({});
+  const { token } = await getPhoneNumber({});
   const accessToken = await getAccessToken();
-  const {userInfo}= await getUserInfo({autoRequestPermission:true})
+
+  const { userInfo } = await getUserInfo({ autoRequestPermission: true });
   const authenticateUser = await AuthService.authControllerLoginV1({
     requestBody: {
-      zaloAccessToken: accessToken || "0000000001",
-      phoneNumber: tokenPhone?.number || "0000000002",
-      avatar:userInfo.avatar,
-      name:userInfo.name
+      zaloAccessToken: accessToken,
+      phoneNumber: token || "0000000002",
+      avatar: userInfo.avatar,
+      name: userInfo.name,
     },
   });
   OpenAPI.TOKEN = authenticateUser.token;

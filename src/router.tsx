@@ -2,12 +2,12 @@ import Layout from "./Layout";
 import { createBrowserRouter } from "react-router-dom";
 import { getBasePath } from "@/utils/zma";
 import HomePage from "./pages/home";
-import ProfilePage from "@/common-pages/profile";
-import BookServicePage from "@/common-pages/booking/book-service";
-import BookProviderPage from "@/common-pages/booking/book-provider";
-import BookTimeSlotPage from "@/common-pages/booking/book-time-slot";
-import PersonalInfoPage from "@/common-pages/personal-infor";
-import DetailInfoPage from "@/common-pages/personal-infor/detail-infor";
+import ProfilePage from "@/pages/profile";
+import BookServicePage from "@/pages/booking/book-service";
+import BookProviderPage from "@/pages/booking/book-provider";
+import BookTimeSlotPage from "@/pages/booking/book-time-slot";
+import PersonalInfoPage from "@/pages/personal-infor";
+import DetailInfoPage from "@/pages/personal-infor/detail-infor";
 import { ProtectedRoute } from "@/components/protected-route";
 
 import PaymentPage from "@/components/payment-list";
@@ -17,7 +17,7 @@ import AppointmentPage from "./pages/appointment/index-customer";
 import AppointmentStaffPage from "./pages/appointment/index-staff";
 import ServicePage from "@/components/service/service-tabs";
 import TreatmentPage from "@/components/treatment-list";
-import BookConfirmPage from "@/common-pages/booking/book-confirm";
+import BookConfirmPage from "@/pages/booking/book-confirm";
 import CustomerRecordPage from "./pages/customer-record";
 import CustomerRecordCreatePage from "./pages/customer-record/create-form";
 import ScheduleCreatePage from "./pages/schedule/create-form";
@@ -106,7 +106,11 @@ export const router = createBrowserRouter(
         },
         {
           path: "/profile/personal-info",
-          element: <PersonalInfoPage />,
+          element: (
+            <ProtectedRoute>
+              <PersonalInfoPage />
+            </ProtectedRoute>
+          ),
           handle: {
             title: "Thông tin cá nhân",
             back: true,
@@ -151,21 +155,33 @@ export const router = createBrowserRouter(
         },
         {
           path: "/customer-record",
-          element: <CustomerRecordPage />,
+          element: (
+            <ProtectedRoute>
+              <CustomerRecordPage />
+            </ProtectedRoute>
+          ),
           handle: {
             title: "Hồ sơ",
           },
         },
         {
           path: "/customer-record/create",
-          element: <CustomerRecordCreatePage />,
+          element: (
+            <ProtectedRoute>
+              <CustomerRecordCreatePage />
+            </ProtectedRoute>
+          ),
           handle: {
             title: "Thêm hồ sơ",
           },
         },
         {
           path: "/customer-record/update/:id",
-          element: <CustomerRecordUpdatePage />,
+          element: (
+            <ProtectedRoute>
+              <CustomerRecordUpdatePage />
+            </ProtectedRoute>
+          ),
           handle: {
             title: "Cập nhật hồ sơ",
           },
@@ -200,6 +216,7 @@ export const router = createBrowserRouter(
           ),
           handle: {
             title: "Chatbot",
+            hideFooter: true,
           },
         },
         {

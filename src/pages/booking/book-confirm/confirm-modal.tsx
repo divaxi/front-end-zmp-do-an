@@ -25,7 +25,7 @@ const ConfirmModal: FunctionComponent<Props> = ({ appointment, navigate }) => {
           className: "confirm-book",
           onClick: () => {
             postCreateAppointment({ requestBody: appointment })
-              .then((res) => {
+              .then(() => {
                 openSnackbar({
                   position: "bottom",
                   type: "success",

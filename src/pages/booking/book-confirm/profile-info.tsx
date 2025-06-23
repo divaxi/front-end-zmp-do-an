@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useCustomerRecord } from "@/client/services/customer-record";
 import { useAtomValue } from "jotai";
 import { authState } from "@/state";

@@ -26,7 +26,7 @@ export function InputMessage({ onSend, loading }: InputMessageProps) {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-white flex items-center px-4 py-3 z-10">
+    <div className="fixed bottom-0 left-0  w-full bg-white flex items-center px-4 py-5 z-10">
       <input
         ref={inputRef}
         type="text"

@@ -1,17 +1,21 @@
 import React, { FunctionComponent } from "react";
 import { Modal, useSnackbar } from "zmp-ui";
 import { useModalLoader } from "@/provider/ModalProvider";
-
+import { deleteAppointment } from "@/client/services/appointment";
+import { format } from "date-fns";
 interface props {
   dateTime: string;
-  execute: () => void;
+  id: string;
+  onDelete: () => void;
 }
 
 const AppointmentDeleteConfirmModal: FunctionComponent<props> = ({
   dateTime,
-  execute,
+  id,
+  onDelete,
 }) => {
   const { modalOpen, hideModal } = useModalLoader();
+  const { openSnackbar } = useSnackbar();
   return (
     <Modal
       visible={modalOpen}
@@ -27,8 +31,20 @@ const AppointmentDeleteConfirmModal: FunctionComponent<props> = ({
             color: "red",
           },
           onClick: () => {
-            execute();
-
+            deleteAppointment({ id })
+              .then(() => {
+                openSnackbar({
+                  text: "Đã hủy lịch hẹn",
+                  type: "success",
+                });
+                onDelete();
+              })
+              .catch(() => {
+                openSnackbar({
+                  text: "Lỗi hủy lịch hẹn",
+                  type: "error",
+                });
+              });
             hideModal();
           },
         },
@@ -37,7 +53,7 @@ const AppointmentDeleteConfirmModal: FunctionComponent<props> = ({
           close: true,
         },
       ]}
-      description={`Bạn có chắc chắn muốn hủy lịch hẹn vào ngày "${dateTime}"`}
+      description={`Bạn có chắc chắn muốn hủy lịch hẹn vào ngày "${format(dateTime, "dd-MM-yyyy / HH:mm")}"`}
     />
   );
 };

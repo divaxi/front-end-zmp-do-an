@@ -24,8 +24,8 @@ export default function Header() {
 
   if (handle?.logo) {
     return (
-      <div className="h-14 w-full flex items-center justify-between px-4 py-2 mt-[var(--zaui-safe-area-inset-top)]">
-        <div className="flex items-center space-x-2">
+      <div className="h-14 w-full flex items-center justify-between px-2 py-2 mt-[var(--zaui-safe-area-inset-top)]">
+        <div className="flex items-center space-x-1">
           <img src={headerLogoImage} className="max-h-full flex-none " />
           <p className="text-sm font-medium flex flex-col justify-center">
             <span>Chào mừng</span>

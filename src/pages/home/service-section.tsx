@@ -2,12 +2,27 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useServices } from "@/client/services/service";
-
+import { Skeleton } from "@/components/ui/skeleton";
 export default function ServiceSection() {
   const navigate = useNavigate();
-  const { data: services } = useServices({ limit: 6, page: 1 });
+  const { data: services, isLoading } = useServices({ limit: 6, page: 1 });
   return (
     <div className="px-4 pb-4 pt-6">
+      {isLoading && (
+        <div className="grid grid-cols-2 gap-3 w-full">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col min-w-[150px] border border-[var(--normalBorder)] rounded-md shadow-sm p-2"
+            >
+              <div className="w-full h-[100px] object-cover rounded-md bg-skeleton" />
+              <p className="text-sm text-subtitle mt-2 line-clamp-2">
+                <Skeleton className="w-full h-[20px] rounded-md" />
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex justify-between items-center mb-3">
         <h2 className="text-base font-bold">Dịch vụ</h2>
         <Button

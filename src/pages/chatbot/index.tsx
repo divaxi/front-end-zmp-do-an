@@ -15,7 +15,7 @@ const ChatbotPage: React.FC = () => {
     setFirstMount(false);
   });
   return (
-    <div className="relative bg-white">
+    <div className="relative bg-white h-full">
       <MessageSection messages={messages} loading={loading} />
       <InputMessage
         loading={loading}

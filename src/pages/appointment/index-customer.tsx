@@ -15,7 +15,7 @@ const AppointmentPage: React.FC = () => {
 
   const { data } = useAppointment({
     page,
-    limit:6,
+    limit: 6,
     userId: auth?.auth?.user.id as number,
   });
 
@@ -32,7 +32,11 @@ const AppointmentPage: React.FC = () => {
   return (
     <div className="relative">
       <AppointmentList appointments={appointments} isStaff={!!staff} />
-      <PaginationComponent page={page} onPageChange={setPage} hasNextPage={data?.hasNextPage||false}/>
+      <PaginationComponent
+        page={page}
+        onPageChange={setPage}
+        hasNextPage={data?.hasNextPage || false}
+      />
       <div className="fixed bottom-24 right-3 flex flex-col items-center gap-2 z-50">
         <h1 className="text-primary font-semibold text-sm">Đặt lịch ngay</h1>
         <PlusCircleIcon

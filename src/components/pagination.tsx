@@ -13,7 +13,11 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const PaginationComponent: FC<PaginationProps> = ({ page, hasNextPage, onPageChange }) => {
+const PaginationComponent: FC<PaginationProps> = ({
+  page,
+  hasNextPage,
+  onPageChange,
+}) => {
   return (
     <div className="w-full flex justify-center mt-4">
       <Pagination className="w-full max-w-[200px]">

@@ -15,8 +15,11 @@ const SchedulePage: React.FC = () => {
   const navigate = useNavigate();
   const setLoading = useSetAtom(loadingState);
 
-
-  const { data } = useSchedules({ staffId: staff?.id as string, page, limit:6 });
+  const { data } = useSchedules({
+    staffId: staff?.id as string,
+    page,
+    limit: 6,
+  });
 
   useEffect(() => {
     if (!data) return;
@@ -26,7 +29,11 @@ const SchedulePage: React.FC = () => {
   return (
     <div className="relative">
       <ScheduleList schedules={schedules} />
-      <PaginationComponent page={page} onPageChange={setPage} hasNextPage={data?.hasNextPage||false}/>
+      <PaginationComponent
+        page={page}
+        onPageChange={setPage}
+        hasNextPage={data?.hasNextPage || false}
+      />
       <div className="fixed bottom-24 right-3 flex flex-col items-center gap-2 z-10">
         <h1 className="text-primary font-semibold text-sm">Thêm lịch</h1>
         <PlusCircleIcon
